@@ -1,0 +1,278 @@
+/* 全局样式 */
+.container {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
+  color: #1d1d1f;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+}
+
+/* 每周精选书籍区域 */
+.weeklyBook {
+  padding: 120px 20px 60px;
+  background: linear-gradient(180deg, #fbfbfd 0%, #fff 100%);
+}
+
+.weeklyBookContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.weeklyBookInfo {
+  text-align: left;
+}
+
+.weeklyBookInfo h2 {
+  font-size: 28px;
+  color: #1d1d1f;
+  margin-bottom: 20px;
+}
+
+.weeklyBookInfo h3 {
+  font-size: 48px;
+  line-height: 1.08349;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.weeklyBookCover {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.weeklyBookCover:hover {
+  transform: scale(1.02);
+}
+
+/* WebNovel介绍区域 */
+.webNovelIntro {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+
+.benefitCard {
+  padding: 30px;
+  background: #f5f5f7;
+  border-radius: 18px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-5px);
+}
+
+.benefitIcon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* 分类导航 */
+.categories {
+  padding: 40px 20px;
+  background-color: #fbfbfd;
+}
+
+.categoryNav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categoryBtn {
+  padding: 8px 20px;
+  border: 1px solid #d2d2d7;
+  border-radius: 20px;
+  background: transparent;
+  color: #1d1d1f;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categoryBtn:hover,
+.categoryBtn.active {
+  background-color: #0071e3;
+  color: #fff;
+  border-color: #0071e3;
+}
+
+/* 精选推荐区域 */
+.featuredSection {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.bookCard {
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.bookCard:hover {
+  transform: translateY(-5px);
+}
+
+.bookCover {
+  margin: 0 auto 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookInfo h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1d1d1f;
+}
+
+.author {
+  font-size: 16px;
+  color: #86868b;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #1d1d1f;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tag {
+  padding: 8px 16px;
+  background-color: #f5f5f7;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #1d1d1f;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* 更多内容区域 */
+.moreContent {
+  padding: 80px 20px;
+  background-color: #fbfbfd;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+
+.contentCard {
+  background: #fff;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.contentCard:hover {
+  transform: translateY(-5px);
+}
+
+/* 按钮样式 */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #0071e3;
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0077ed;
+  transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .weeklyBookContent {
+    grid-template-columns: 1fr;
+  }
+
+  .weeklyBookInfo h3 {
+    font-size: 36px;
+  }
+
+  .benefitsGrid,
+  .featuredGrid,
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featuredSection h2 {
+  font-size: 2.0rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #000000 0%, #000000 50%, #0f2027 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.featuredSection h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, transparent 0%, #000000 50%, transparent 100%);
+  transition: all 0.3s ease;
+}
+
+.featuredSection h2:hover::after {
+  width: 100%;
+  background: linear-gradient(to right, #000000 0%, #0f2027 100%);
+}

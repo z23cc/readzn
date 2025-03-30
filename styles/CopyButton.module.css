@@ -1,0 +1,88 @@
+.copyButtonContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: #f5f5f7;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #86868b;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  background-color: #e5e5ea;
+  color: #1d1d1f;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background-color: #1d1d1f;
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+
+.tooltip:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1d1d1f transparent transparent transparent;
+}
+
+.tooltipText {
+  margin-bottom: 4px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.tooltipStatus {
+  font-size: 10px;
+  color: #a1a1a6;
+}
+
+/* 适配深色模式 */
+@media (prefers-color-scheme: dark) {
+  .copyButton {
+    background-color: #2c2c2e;
+    color: #a1a1a6;
+  }
+
+  .copyButton:hover {
+    background-color: #3a3a3c;
+    color: #f5f5f7;
+  }
+
+  .tooltip {
+    background-color: #3a3a3c;
+  }
+
+  .tooltip:after {
+    border-color: #3a3a3c transparent transparent transparent;
+  }
+}

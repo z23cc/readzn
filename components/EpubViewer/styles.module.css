@@ -1,0 +1,188 @@
+.epubViewer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.epubViewer iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.epubViewer ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.epubViewer ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.epubViewer ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+:global(.dark) .epubViewer ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.epubViewer div[style*="transform"] {
+  transition: transform 0.3s ease;
+}
+
+.clickArea {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.clickArea.left {
+  left: 0;
+}
+
+.clickArea.right {
+  right: 0;
+}
+
+.pageInfo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 16px;
+  font-size: 14px;
+  z-index: 20;
+  bottom: 20px;
+}
+
+:global(.dark) .pageInfo {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navigationButtons {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.navigationButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+:global(.dark) .navigationButton {
+  background-color: rgba(44, 44, 46, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.navigationButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+:global(.dark) .navigationButton:hover {
+  background-color: rgba(58, 58, 60, 1);
+}
+
+.navigationButton:active {
+  transform: scale(0.95);
+}
+
+.navigationButton.prev {
+  margin-right: auto;
+}
+
+.navigationButton.next {
+  margin-left: auto;
+}
+
+.error {
+  color: #ff4d4f;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+
+/* Loading Animation - Apple Style */
+.loadingContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  transition: opacity 0.5s ease;
+}
+
+:global(.dark) .loadingContainer {
+  background-color: rgba(28, 28, 30, 0.95);
+}
+
+.loadingSpinner {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+}
+
+.loadingCircle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-top-color: #007aff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+:global(.dark) .loadingCircle {
+  border-top-color: #0a84ff;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #8e8e93;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+:global(.dark) .loadingText {
+  color: #98989d;
+}
