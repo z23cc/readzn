@@ -1,8 +1,11 @@
-<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">
+<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">[https://readzn.com/](https://readzn.com/)
+
+
+[English](README.md) | 简体中文
 
 # Readzn
 
-📚 基于Notion和Next.js构建的静态知识导航网站，专注于优质阅读资源的组织与发现。通过自动化同步Notion数据库内容，实现零成本维护的知识库系统。
+📚 基于Notion和Next.js构建的知识型网站，致力于打造解决阅读烦恼的一站式平台。通过自动化同步Notion数据库内容，实现零成本维护的知识库系统。特别适合博客、文档站点和个人知识库的搭建。
 
 ## 项目背景
 随着信息爆炸式增长，如何高效组织和管理知识资源成为痛点。Readzn结合Notion的灵活内容管理和Next.js的高性能渲染，打造开箱即用的知识导航解决方案。

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Layout from '@/components/Layout';
 import ConfirmDialog from '@/components/ConfirmDialog';
 import CopyButton from '@/components/CopyButton';
-import styles from '@/styles/EpubOnline.module.css';
+import styles from '@/styles/OnlineReader.module.css';
 
 export default function EpubOnline() {
   const [urlInput, setUrlInput] = useState('');

@@ -1,4 +1,6 @@
-<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">
+<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50"> [https://readzn.com/](https://readzn.com/)
+
+English | [简体中文](README_ZH.md)
 
 # Readzn
 
