@@ -1,0 +1,339 @@
+.siteInfoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 2xl;
+  margin-top: 1rem;
+  padding: 0;
+  background-color: #f5f5f7;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.dark .siteInfoContainer {
+  background-color: #1d1d1f;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.siteMetaInfo {
+  padding: 1rem 1.5rem 0;
+  width: 100%;
+}
+
+.siteMetaData {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: #6e6e73;
+  margin-bottom: 0.5rem;
+}
+
+.dark .siteMetaData {
+  color: #a1a1a6;
+}
+
+.siteCollectionLabel {
+  margin-right: 0.5rem;
+}
+
+.siteDate {
+  margin-right: 1rem;
+}
+
+.siteTags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.siteHeader {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .siteHeader {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.siteImageWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.siteHeaderInfo {
+  margin-left: 1.5rem;
+  flex: 1;
+}
+
+.siteTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1d1d1f;
+  line-height: 1.2;
+}
+
+.dark .siteTitle {
+  color: #f5f5f7;
+}
+
+.siteTitleLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.siteTitleLink:hover {
+  color: #0071e3;
+}
+
+.dark .siteTitleLink:hover {
+  color: #0077ed;
+}
+
+.siteSummary {
+  font-size: 0.9rem;
+  color: #6e6e73;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.dark .siteSummary {
+  color: #a1a1a6;
+}
+
+.siteContent {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 2rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .siteContent {
+    flex-direction: row;
+  }
+}
+
+.siteDescription {
+  flex: 2;
+}
+
+.siteDescriptionText {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1d1d1f;
+  margin: 0 0 0.75rem 0;
+}
+
+.dark .siteDescriptionText {
+  color: #f5f5f7;
+}
+
+/* 链接状态指示器样式 - 苹果风格 */
+.linkStatusContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.dark .linkStatusContainer {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.linkStatusIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.linkStatusTesting .linkStatusIndicator {
+  background-color: #f7c942;
+  animation: pulse 1.5s infinite;
+}
+
+.linkStatusOnline .linkStatusIndicator {
+  background-color: #30d158;
+}
+
+.linkStatusOffline .linkStatusIndicator {
+  background-color: #ff453a;
+}
+
+.linkStatusInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.linkStatusText {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1d1d1f;
+  margin-bottom: 0.25rem;
+}
+
+.dark .linkStatusText {
+  color: #f5f5f7;
+}
+
+.linkSpeedText {
+  font-size: 0.8rem;
+  color: #6e6e73;
+}
+
+.dark .linkSpeedText {
+  color: #a1a1a6;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+.siteHighlight {
+  font-weight: 600;
+  color: #0071e3;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.siteHighlight:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.siteActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin-top: 1.5rem;
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .siteActions {
+    margin-top: 0;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .siteActions {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.qrCodeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.qrCodeWrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qrCodeLabel {
+  font-size: 0.85rem;
+  color: #6e6e73;
+  text-align: center;
+}
+
+.dark .qrCodeLabel {
+  color: #a1a1a6;
+}
+
+.visitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #0071e3;
+  color: white;
+  border-radius: 2rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+}
+
+.visitButton:hover {
+  background-color: #0077ed;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.visitButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.visitButtonIcon {
+  margin-left: 0.5rem;
+}
+
+/* 教程部分样式 */
+.tutorialSection {
+  width: 100%;
+  max-width: 2xl;
+  margin-top: 2rem;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 0 0 2rem 0;
+}
+
+.dark .tutorialSection {
+  background-color: #1d1d1f;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tutorialTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  padding: 1.5rem 2rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .tutorialTitle {
+  color: #f5f5f7;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -7,7 +7,7 @@ import { useLocale } from '@/lib/locale'
 import { useConfig } from '@/lib/config'
 import { createHash } from 'crypto'
 import Container from '@/components/Container'
-import Post from '@/components/Post'
+import SitesPost from '@/components/SitesPost'
 import Comments from '@/components/Comments'
 
 export default function BlogPost ({ post, blockMap, emailHash }) {
@@ -30,13 +30,12 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
       type="article"
       fullWidth={fullWidth}
     >
-      <Post
+      <SitesPost
         post={post}
         blockMap={blockMap}
         emailHash={emailHash}
         fullWidth={fullWidth}
       />
-
       {/* Back and Top */}
       <div
         className={cn(
@@ -73,7 +72,7 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
 export async function getStaticPaths () {
   const posts = await getAllPosts({ includePages: true })
   return {
-    paths: posts.map(row => `${clientConfig.path}/${row.slug}`),
+    paths: posts.map(row => ({ params: { slug: row.slug } })),
     fallback: true
   }
 }

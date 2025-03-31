@@ -62,7 +62,9 @@ export default function Home({ postsToShow }) {
           description: post.summary,
           image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png",
           link: post.link,
-          tags: post.tags
+          tags: post.tags,
+          slug: post.slug,
+          up: post.up
         });
       });
     }
@@ -143,7 +145,8 @@ export default function Home({ postsToShow }) {
                             <span key={tagIndex} className={styles.cardTag}>{tag}</span>
                           ))}
                         </div>
-                        <a href={resource.link} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>访问网站</a>
+                        {/* <a href={resource.link} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>访问网站</a> */}
+                        <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>立即访问</a>
                       </div>
                     </div>
                   ))}
