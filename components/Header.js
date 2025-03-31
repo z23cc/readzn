@@ -12,6 +12,7 @@ export default function Header({navBarTitle, fullWidth}) {
         <div className={styles.titleContainer}>
           <h1>{navBarTitle || "阅读指南"}</h1>
           <span className={styles.domain}>readzn.com</span>
+          <span className={styles.slogan}>爱读书，会读书，读好书</span>
         </div>
 
       </div>
@@ -19,7 +20,8 @@ export default function Header({navBarTitle, fullWidth}) {
         <ul>
           <li><Link title="Home" href="/">首页</Link></li>
           {/* <li><Link title="Featured Books" href="/featured-books">好书推荐</Link></li> */}
-          <li><Link title="Online Epub Reader" href="/online-reader">在线ePub</Link></li>
+          {/* <li><Link title="Online Epub Reader" href="/online-reader">在线ePub</Link></li> */}
+          <li><Link title="Online Epub Reader" href="https://reader.readzn.com/" target='_blank'>在线ePub</Link></li>
           {/* <li><Link title="Browse our latest articles" href="/articles">Kindle专栏</Link></li> */}
           {/* <li><Link title="Explore Tao Books" href="/tao-books">阅读器测评</Link></li> */}
           {/* <li><Link title="Online Books Converter" href="/book-converter">在线格式转换</Link></li> */}
