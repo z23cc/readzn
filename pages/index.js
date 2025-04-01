@@ -137,6 +137,9 @@ export default function Home({ postsToShow }) {
                     <div key={index} className={styles.resourceCard}>
                       <div className={styles.cardImage}>
                         <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
+                        {resource.up && resource.up.includes('up') && (
+                          <div className={styles.officialRecommend}>✓ 官方推荐</div>
+                        )}
                       </div>
                       <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>{resource.title}</h3>

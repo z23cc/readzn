@@ -152,6 +152,44 @@
   margin-bottom: 12px;
 }
 
+/* 官方推荐标识 */
+.officialRecommend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(90deg, #0066cc, #5ac8fa);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 102, 204, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+  }
+}
+
+.resourceCard:hover .officialRecommend {
+  animation: pulse 2s infinite;
+}
+
 .cardTag {
   padding: 3px 8px;
   background-color: #f5f5f7;
