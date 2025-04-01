@@ -29,6 +29,8 @@ export async function getStaticProps() {
 export default function Home({ postsToShow }) {
   const BLOG = useConfig();
   const [activeCategory, setActiveCategory] = useState('zlibrary专栏');
+  const [searchValue, setSearchValue] = useState('');
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   // 滚动到指定区域
   const scrollToSection = (id) => {
@@ -45,6 +47,32 @@ export default function Home({ postsToShow }) {
   const categories = [];
   // 资源网站数据
   const resources = {};
+
+  // 搜索结果
+  let searchResults = [];
+  if (searchValue.trim() !== '') {
+    searchResults = postsToShow.filter(post => {
+      const tagContent = post.tags ? post.tags.join(' ') : '';
+      const searchContent = post.title + post.summary + tagContent;
+      return searchContent.toLowerCase().includes(searchValue.toLowerCase());
+    }).map(post => ({
+      ...post,
+      image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png"
+    }));
+  }
+
+  // 处理搜索输入
+  const handleSearchInput = (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    setShowSearchResults(value.trim() !== '');
+  };
+
+  // 清除搜索
+  const clearSearch = () => {
+    setSearchValue('');
+    setShowSearchResults(false);
+  };
 
   // 遍历postsToShow，填充菜单和资源网站数据
   postsToShow.forEach(post => {
@@ -101,10 +129,64 @@ export default function Home({ postsToShow }) {
           <h1 className={styles.heroTitle}>阅读指南</h1>
           <p className={styles.heroSubtitle}>发现和探索全球优质的阅读资源，让知识触手可及</p>
           <div className={styles.searchBar}>
-            <input type="text" className={styles.searchInput} placeholder="搜索资源..." />
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="搜索资源..."
+              value={searchValue}
+              onChange={handleSearchInput}
+            />
+            {searchValue && (
+              <button
+                className={styles.clearSearchBtn}
+                onClick={clearSearch}
+                aria-label="清除搜索"
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
 
+        {/* 搜索结果 */}
+        {showSearchResults && (
+          <div className={styles.searchResults}>
+            <div className={styles.searchResultsHeader}>
+              <h2>搜索结果: {searchResults.length} 个资源</h2>
+              <button onClick={clearSearch} className={styles.backButton}>返回全部资源</button>
+            </div>
+            <div className={styles.resourceGrid}>
+              {searchResults.length > 0 ? (
+                searchResults.map((resource, index) => (
+                  <div key={index} className={styles.resourceCard}>
+                    <div className={styles.cardImage}>
+                      <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
+                      {resource.up && resource.up.includes('up') && (
+                        <div className={styles.officialRecommend}>✓ 官方推荐</div>
+                      )}
+                    </div>
+                    <div className={styles.cardContent}>
+                      <h3 className={styles.cardTitle}>{resource.title}</h3>
+                      <p className={styles.cardDescription}>{resource.summary || resource.description}</p>
+                      <div className={styles.cardTags}>
+                        {resource.tags && resource.tags.map((tag, tagIndex) => (
+                          <span key={tagIndex} className={styles.cardTag}>{tag}</span>
+                        ))}
+                      </div>
+                      <LinkStatus url={resource.link || '#'} />
+                      <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>立即访问</a>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className={styles.noResults}>没有找到匹配的资源，请尝试其他关键词</div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 主内容区域 - 仅在非搜索状态下显示 */}
+        {!showSearchResults && (
         <main className={styles.main}>
           {/* 左侧菜单 */}
           <aside className={styles.sidebar}>
@@ -160,6 +242,7 @@ export default function Home({ postsToShow }) {
             ))}
           </div>
         </main>
+        )}
 
         {/* 收藏提示框 */}
         <BookmarkPrompt />
