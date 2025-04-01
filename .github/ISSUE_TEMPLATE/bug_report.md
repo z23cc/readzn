@@ -1,12 +1,12 @@
 ---
 name: Bug report
-about: Create a report to help Nobelium get better.
+about: Create a report to help readzn get better.
 title: ''
 labels: bug
 ---
 
 <!--
-  中文用户请注意：请仔细阅读以下模版，并使用英文描述问题。如果不遵循，issue 将会被关闭。
+  中文用户请注意：为保持自由态度，支持中文描述问题。
 
   !!! IMPORTANT !!!
   Please do not ignore this template. If you do, your issue will be closed.
@@ -39,4 +39,4 @@ labels: bug
   <!-- E.g. Chrome 90, Safari 12.1, Firefox 87 -->
 - Browser:
   <!-- The commit hash of your deployment. E.g. 0dfc11d -->
-- Nobelium:
+- Readzn version:

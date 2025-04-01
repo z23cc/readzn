@@ -1,6 +1,6 @@
 ---
 name: Deployment error
-about: Do you need help to install Nobelium?
+about: Do you need help to install Readzn?
 title: ''
 labels: deployment
 ---

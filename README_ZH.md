@@ -73,13 +73,13 @@ pnpm dev
 ```bash
 # 设置环境变量
 export NOTION_PAGE_ID=xxx
-export IMAGE=nobelium:latest
+export IMAGE=readzn:latest
 
 # 构建Docker镜像
 docker build -t ${IMAGE} --build-arg NOTION_PAGE_ID .
 
 # 运行容器
-docker run -d --name nobelium -p 3000:3000 -e NOTION_PAGE_ID=${NOTION_PAGE_ID} ${IMAGE}
+docker run -d --name readzn -p 3000:3000 -e NOTION_PAGE_ID=${NOTION_PAGE_ID} ${IMAGE}
 ```
 
 ## 贡献指南

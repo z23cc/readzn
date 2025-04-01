@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Nobelium.
+about: Suggest an idea for Readzn.
 title: ''
 labels: enhancement
 ---

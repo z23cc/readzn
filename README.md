@@ -72,13 +72,13 @@ pnpm dev
 ```bash
 # Set environment variables
 export NOTION_PAGE_ID=xxx
-export IMAGE=nobelium:latest
+export IMAGE=readzn:latest
 
 # Build Docker image
 docker build -t ${IMAGE} --build-arg NOTION_PAGE_ID .
 
 # Run container
-docker run -d --name nobelium -p 3000:3000 -e NOTION_PAGE_ID=${NOTION_PAGE_ID} ${IMAGE}
+docker run -d --name readzn -p 3000:3000 -e NOTION_PAGE_ID=${NOTION_PAGE_ID} ${IMAGE}
 ```
 
 ## Contributing
