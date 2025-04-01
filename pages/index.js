@@ -9,6 +9,7 @@ import { getAllPosts } from '@/lib/notion';
 import { clientConfig } from '@/lib/server/config';
 import BookmarkPrompt from '@/components/BookmarkPrompt';
 import SiteInfo from '@/components/SiteInfo';
+import LinkStatus from '@/components/LinkStatus';
 
 export async function getStaticProps() {
   const posts = await getAllPosts({ includePages: false, owner: 'resource_nav' })
@@ -145,7 +146,8 @@ export default function Home({ postsToShow }) {
                             <span key={tagIndex} className={styles.cardTag}>{tag}</span>
                           ))}
                         </div>
-                        {/* <a href={resource.link} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>访问网站</a> */}
+                        {/* 添加链接状态指示器 */}
+                        <LinkStatus url={resource.link || '#'} />
                         <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>立即访问</a>
                       </div>
                     </div>

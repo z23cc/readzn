@@ -8,7 +8,7 @@ import TagItem from '@/components/TagItem'
 import NotionRenderer from '@/components/NotionRenderer'
 import TableOfContents from '@/components/TableOfContents'
 import QRCode from 'react-qr-code'
-import { useState, useEffect } from 'react'
+import LinkStatus from '@/components/LinkStatus'
 import styles from '@/styles/SitesPost.module.css'
 
 /**
@@ -27,68 +27,7 @@ export default function SitesPost (props) {
   const { post, blockMap, emailHash, fullWidth = false } = props
   const { dark } = useTheme()
 
-  // 链接状态相关状态
-  const [linkStatus, setLinkStatus] = useState('testing') // 'testing', 'online', 'offline'
-  const [linkSpeed, setLinkSpeed] = useState(null) // 毫秒
-  const [isTestingLink, setIsTestingLink] = useState(true)
-
-  // 测试链接可用性和速度
-  useEffect(() => {
-    if (!post.link || post.link === '#') {
-      setLinkStatus('offline')
-      setIsTestingLink(false)
-      return
-    }
-
-    const testLink = async () => {
-      const startTime = Date.now()
-      let isCompleted = false
-
-      // 设置超时
-      const timeoutId = setTimeout(() => {
-        if (!isCompleted) {
-          isCompleted = true
-          setLinkStatus('offline')
-          setIsTestingLink(false)
-        }
-      }, 5000) // 5秒超时
-
-      try {
-        // 使用fetch API发送HEAD请求检测链接状态
-        const response = await fetch(post.link, {
-          method: 'HEAD',
-          mode: 'no-cors' // 避免跨域问题
-        })
-
-        if (!isCompleted) {
-          isCompleted = true
-          clearTimeout(timeoutId)
-
-          const endTime = Date.now()
-          const duration = endTime - startTime
-
-          setLinkSpeed(duration)
-          setLinkStatus('online')
-          setIsTestingLink(false)
-        }
-      } catch (error) {
-        if (!isCompleted) {
-          isCompleted = true
-          clearTimeout(timeoutId)
-
-          setLinkStatus('offline')
-          setIsTestingLink(false)
-        }
-      }
-    }
-
-    testLink()
-
-    // 清理函数
-    return () => {
-      setIsTestingLink(false)
-    }
-  }, [post.link])
+  // 使用抽象的链接测试功能
 
   return (
     <article className={cn('flex flex-col', fullWidth ? 'md:px-24' : 'items-center')}>
@@ -131,24 +70,8 @@ export default function SitesPost (props) {
           <div className={styles.siteDescription}>
             <p className={styles.siteDescriptionText}>本站收录了 <a href={post.link || '#'} target="_blank" rel="noopener noreferrer" className={styles.siteHighlight}>{post.title}</a> 网站，为您提供便捷的访问方式。您可以通过链接直接访问该网站，或者使用手机扫描二维码在移动设备上打开。</p>
 
-            {/* 链接状态指示器 - 苹果风格 */}
-            <div className={cn(styles.linkStatusContainer, {
-              [styles.linkStatusTesting]: linkStatus === 'testing',
-              [styles.linkStatusOnline]: linkStatus === 'online',
-              [styles.linkStatusOffline]: linkStatus === 'offline'
-            })}>
-              <div className={styles.linkStatusIndicator}></div>
-              <div className={styles.linkStatusInfo}>
-                <span className={styles.linkStatusText}>
-                  {linkStatus === 'testing' && '正在测试链接...'}
-                  {linkStatus === 'online' && '链接正常'}
-                  {linkStatus === 'offline' && '链接异常'}
-                </span>
-                {linkStatus === 'online' && linkSpeed && (
-                  <span className={styles.linkSpeedText}>{linkSpeed < 1000 ? '速度极快' : linkSpeed < 2000 ? '速度良好' : '速度一般'} ({linkSpeed}ms)</span>
-                )}
-              </div>
-            </div>
+            {/* 使用抽象的链接状态组件 */}
+            <LinkStatus url={post.link || '#'} />
           </div>
           <div className={styles.siteActions}>
             <div className={styles.qrCodeContainer}>
