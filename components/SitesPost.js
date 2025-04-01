@@ -59,7 +59,7 @@ export default function SitesPost(props) {
           </div>
           <div className={styles.siteHeaderInfo}>
             <h1 className={styles.siteTitle}>
-              <a href={post.link + "/?ref=readzn.com" || '#'} target="_blank" rel="noopener noreferrer" className={styles.siteTitleLink}>
+              <a href={post.link || '#'} target="_blank" rel="noopener noreferrer" className={styles.siteTitleLink}>
                 {post.title}
               </a>
             </h1>
@@ -68,7 +68,7 @@ export default function SitesPost(props) {
         </div>
         <div className={styles.siteContent}>
           <div className={styles.siteDescription}>
-            <p className={styles.siteDescriptionText}>本站收录了 <a href={post.link + "/?ref=readzn.com" || '#'} target="_blank" rel="noopener noreferrer" className={styles.siteHighlight}>{post.title}</a> 网站，为您提供便捷的访问方式。您可以通过链接直接访问该网站，或者使用手机扫描二维码在移动设备上打开。</p>
+            <p className={styles.siteDescriptionText}>本站收录了 <a href={post.link || '#'} target="_blank" rel="noopener noreferrer" className={styles.siteHighlight}>{post.title}</a> 网站，为您提供便捷的访问方式。您可以通过链接直接访问该网站，或者使用手机扫描二维码在移动设备上打开。</p>
 
             {/* 使用抽象的链接状态组件 */}
             <LinkStatus url={post.link || '#'} />
@@ -77,7 +77,7 @@ export default function SitesPost(props) {
             <div className={styles.qrCodeContainer}>
               <div className={styles.qrCodeWrapper}>
                 <QRCode
-                  value={post.link + "/?ref=readzn.com" || '#'}
+                  value={post.link || '#'}
                   size={150}
                   level="H"
                   style={{ width: '100%', height: '100%' }}
@@ -85,7 +85,7 @@ export default function SitesPost(props) {
               </div>
               <p className={styles.qrCodeLabel}>扫描二维码访问</p>
             </div>
-            <a href={post.link + "/?ref=readzn.com" || '#'} target="_blank" rel="noopener noreferrer" className={styles.visitButton}>
+            <a href={post.link || '#'} target="_blank" rel="noopener noreferrer" className={styles.visitButton}>
               链接直达
               <span className={styles.visitButtonIcon}>→</span>
             </a>
