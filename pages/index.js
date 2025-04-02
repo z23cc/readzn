@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import LazyImage from '@/components/LazyImage';
 import styles from '@/styles/BookGuide.module.css';
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
@@ -10,6 +11,7 @@ import { clientConfig } from '@/lib/server/config';
 import BookmarkPrompt from '@/components/BookmarkPrompt';
 import SiteInfo from '@/components/SiteInfo';
 import LinkStatus from '@/components/LinkStatus';
+import DefaultCover from '@/components/DefaultCover';
 
 export async function getStaticProps() {
   const posts = await getAllPosts({ includePages: false, owner: 'resource_nav' })
@@ -36,14 +38,24 @@ export default function Home({ postsToShow }) {
   const [showExternalContent, setShowExternalContent] = useState(false);
   const [isExternalLoading, setIsExternalLoading] = useState(false);
   const [searchInNewTab, setSearchInNewTab] = useState(true);
+  const [currentSiteCategory, setCurrentSiteCategory] = useState('电子书');
 
   // 预定义搜索站点
   const searchSites = [
-    { id: '一单书', name: '一单书', placeholder: '在一单书搜索...', url: 'https://yidanshu.com/sobook/{searchTerm}' },
-    { id: '读书派', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}'},
-    { id: '书海旅人', name: '书海旅人', placeholder: '在书海旅人搜索...', url: 'https://bookplusapp.top/books?key={searchTerm}'},
-    { id: '爱悦读', name: '爱悦读', placeholder: '在爱悦读搜索...', url: 'https://www.iyd.wang/?s={searchTerm}'},
-    { id: '站内', name: '站内搜索', placeholder: '搜索资源...' }
+    { id: '一单书', category: '电子书', name: '一单书', placeholder: '在一单书搜索...', url: 'https://yidanshu.com/sobook/{searchTerm}' },
+    { id: '读书派', category: '电子书', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}' },
+    { id: '书海旅人', category: '电子书', name: '书海旅人', placeholder: '在书海旅人搜索...', url: 'https://bookplusapp.top/books?key={searchTerm}' },
+    { id: '爱悦读', category: '电子书', name: '爱悦读', placeholder: '在爱悦读搜索...', url: 'https://www.iyd.wang/?s={searchTerm}' },
+    { id: '站内', category: '电子书', name: '站内搜索', placeholder: '搜索资源...' },
+    { id: '漫画柜', category: '漫画绘本', name: '漫画柜', placeholder: '在漫画柜搜索...', url: 'https://www.manhuagui.com/s/{searchTerm}.html' },
+    { id: '动漫之家', category: '漫画绘本', name: '动漫之家', placeholder: '在动漫之家搜索...', url: 'https://manhua.dmzj.com/tags/search.shtml?s={searchTerm}' },
+    { id: '漫画DB', category: '漫画绘本', name: '漫画DB', placeholder: '在漫画DB搜索...', url: 'https://www.manhuadb.com/search?q={searchTerm}' },
+    { id: '轻小说文库', category: '小说', name: '轻小说文库', placeholder: '在轻小说文库搜索...', url: 'https://www.wenku8.net/modules/article/search.php?searchtype=articlename&searchkey={searchTerm}' },
+    { id: '起点中文网', category: '小说', name: '起点中文网', placeholder: '在起点中文网搜索...', url: 'https://www.qidian.com/search?kw={searchTerm}' },
+    { id: '纵横中文网', category: '小说', name: '纵横中文网', placeholder: '在纵横中文网搜索...', url: 'https://search.zongheng.com/search/all/{searchTerm}' },
+    { id: '知网', category: '学术期刊', name: '中国知网', placeholder: '在中国知网搜索...', url: 'https://kns.cnki.net/kns8/defaultresult/index?kw={searchTerm}' },
+    { id: '万方', category: '学术期刊', name: '万方数据', placeholder: '在万方数据搜索...', url: 'https://www.wanfangdata.com.cn/search/searchList.do?searchType=all&searchWord={searchTerm}' },
+    { id: '维普', category: '学术期刊', name: '维普期刊', placeholder: '在维普期刊搜索...', url: 'http://qikan.cqvip.com/Qikan/Search/Index?key={searchTerm}' }
   ];
 
   // 滚动到指定区域
@@ -71,7 +83,7 @@ export default function Home({ postsToShow }) {
       return searchContent.toLowerCase().includes(searchValue.toLowerCase());
     }).map(post => ({
       ...post,
-      image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png"
+      image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : null
     }));
   }
 
@@ -93,13 +105,26 @@ export default function Home({ postsToShow }) {
     setExternalSearchUrl('');
   };
 
+  // 处理站点分类切换
+  const handleCategoryChange = (category) => {
+    setCurrentSiteCategory(category);
+    // 选择该分类下的第一个站点
+    const sitesInCategory = searchSites.filter(site => site.category === category);
+    if (sitesInCategory.length > 0) {
+      setSearchSite(sitesInCategory[0].id);
+    }
+    setShowSearchResults(false);
+    setShowExternalContent(false);
+    setExternalSearchUrl('');
+  };
+
   // 处理站点选择变化
   const handleSiteChange = (siteId) => {
     setSearchSite(siteId);
     setShowSearchResults(false);
     setShowExternalContent(false);
     setExternalSearchUrl('');
-    
+
     // 如果搜索框有内容，自动触发搜索
     if (searchValue.trim() !== '') {
       // 延迟执行以确保状态更新
@@ -191,7 +216,8 @@ export default function Home({ postsToShow }) {
           id: post.id,
           title: post.title,
           description: post.summary,
-          image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png",
+          image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : null,
+          title: post.title,
           link: post.link,
           tags: post.tags,
           slug: post.slug,
@@ -231,17 +257,66 @@ export default function Home({ postsToShow }) {
           <h1 className={styles.heroTitle}>阅读指南</h1>
           <p className={styles.heroSubtitle}>发现和探索全球优质的阅读资源，让知识触手可及</p>
           <form onSubmit={handleSearchSubmit} className={styles.searchBar}>
+            {/* 站点分类选择器 */}
+            <div className={styles.categorySelectorWrapper}>
+              <div className={styles.categorySelector}>
+                {/* 获取所有不重复的分类 */}
+                {Array.from(new Set(searchSites.map(site => site.category))).map(category => (
+                  <button
+                    key={category}
+                    type="button"
+                    className={`${styles.categoryBtn} ${currentSiteCategory === category ? styles.categoryBtnActive : ''}`}
+                    onClick={() => handleCategoryChange(category)}
+                  >
+                    {/* 为不同分类添加不同图标 */}
+                    {category === '电子书' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                      </svg>
+                    )}
+                    {category === '漫画绘本' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                    )}
+                    {category === '小说' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                    )}
+                    {category === '学术期刊' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                      </svg>
+                    )}
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 站点选择器 */}
             <div className={styles.searchSiteSelector}>
-              {searchSites.map(site => (
-                <button
-                  key={site.id}
-                  type="button"
-                  className={`${styles.siteSelectorBtn} ${searchSite === site.id ? styles.siteSelectorBtnActive : ''}`}
-                  onClick={() => handleSiteChange(site.id)}
-                >
-                  {site.name}
-                </button>
-              ))}
+              {searchSites
+                .filter(site => site.category === currentSiteCategory)
+                .map(site => (
+                  <button
+                    key={site.id}
+                    type="button"
+                    className={`${styles.siteSelectorBtn} ${searchSite === site.id ? styles.siteSelectorBtnActive : ''}`}
+                    onClick={() => handleSiteChange(site.id)}
+                  >
+                    {site.name}
+                  </button>
+                ))}
               <button
                 type="button"
                 className={styles.searchModeToggle}
@@ -298,7 +373,11 @@ export default function Home({ postsToShow }) {
                   <div key={index} className={styles.resourceCard}>
                     <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
                       <div className={styles.cardImage}>
-                        <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
+                        {resource.image ? (
+                          <LazyImage src={resource.image} alt={resource.title} title={resource.title} />
+                        ) : (
+                          <DefaultCover title={resource.title} />
+                        )}
                         {resource.up && resource.up.includes('up') && (
                           <div className={styles.officialRecommend}>✓ 官方推荐</div>
                         )}
@@ -350,63 +429,67 @@ export default function Home({ postsToShow }) {
 
         {/* 主内容区域 - 仅在非搜索状态和非外部内容状态下显示 */}
         {!showSearchResults && !showExternalContent && (
-        <main className={styles.main}>
-          {/* 左侧菜单 */}
-          <aside className={styles.sidebar}>
-            <h2 className={styles.sidebarTitle}>资源分类</h2>
-            <ul className={styles.menuList}>
-              {categories.map((category) => (
-                <li key={category.id} className={styles.menuItem}>
-                  <a
-                    href={`#${category.id}`}
-                    className={`${styles.menuLink} ${activeCategory === category.id ? styles.menuLinkActive : ''}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(category.id);
-                    }}
-                  >
-                    {category.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </aside>
+          <main className={styles.main}>
+            {/* 左侧菜单 */}
+            <aside className={styles.sidebar}>
+              <h2 className={styles.sidebarTitle}>资源分类</h2>
+              <ul className={styles.menuList}>
+                {categories.map((category) => (
+                  <li key={category.id} className={styles.menuItem}>
+                    <a
+                      href={`#${category.id}`}
+                      className={`${styles.menuLink} ${activeCategory === category.id ? styles.menuLinkActive : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(category.id);
+                      }}
+                    >
+                      {category.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
 
-          {/* 右侧内容区域 */}
-          <div className={styles.content}>
-            {categories.map((category) => (
-              <section key={category.id} id={category.id} className={styles.section}>
-                <h2 className={styles.sectionTitle}>{category.name}</h2>
-                <div className={styles.resourceGrid}>
-                  {resources[category.id]?.map((resource, index) => (
-                    <div key={index} className={styles.resourceCard}>
-                      <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                        <div className={styles.cardImage}>
-                          <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
-                          {resource.up && resource.up.includes('up') && (
-                            <div className={styles.officialRecommend}>✓ 官方推荐</div>
-                          )}
-                        </div>
-                        <div className={styles.cardContent}>
-                          <h3 className={styles.cardTitle}>{resource.title}</h3>
-                          <p className={styles.cardDescription}>{resource.description}</p>
-                          <div className={styles.cardTags}>
-                            {resource.tags.map((tag, tagIndex) => (
-                              <span key={tagIndex} className={styles.cardTag}>{tag}</span>
-                            ))}
+            {/* 右侧内容区域 */}
+            <div className={styles.content}>
+              {categories.map((category) => (
+                <section key={category.id} id={category.id} className={styles.section}>
+                  <h2 className={styles.sectionTitle}>{category.name}</h2>
+                  <div className={styles.resourceGrid}>
+                    {resources[category.id]?.map((resource, index) => (
+                      <div key={index} className={styles.resourceCard}>
+                        <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <div className={styles.cardImage}>
+                            {resource.image ? (
+                              <LazyImage src={resource.image} alt={resource.title} title={resource.title} />
+                            ) : (
+                              <DefaultCover title={resource.title} />
+                            )}
+                            {resource.up && resource.up.includes('up') && (
+                              <div className={styles.officialRecommend}>✓ 官方推荐</div>
+                            )}
                           </div>
-                          {/* 添加链接状态指示器 */}
-                          <LinkStatus url={resource.link || '#'} />
-                          <span className={styles.cardLink}>立即访问</span>
-                        </div>
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
-        </main>
+                          <div className={styles.cardContent}>
+                            <h3 className={styles.cardTitle}>{resource.title}</h3>
+                            <p className={styles.cardDescription}>{resource.description}</p>
+                            <div className={styles.cardTags}>
+                              {resource.tags.map((tag, tagIndex) => (
+                                <span key={tagIndex} className={styles.cardTag}>{tag}</span>
+                              ))}
+                            </div>
+                            {/* 添加链接状态指示器 */}
+                            <LinkStatus url={resource.link || '#'} />
+                            <span className={styles.cardLink}>立即访问</span>
+                          </div>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </main>
         )}
 
         {/* 收藏提示框 */}
