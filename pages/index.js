@@ -31,7 +31,7 @@ export default function Home({ postsToShow }) {
   const [activeCategory, setActiveCategory] = useState('zlibrary专栏');
   const [searchValue, setSearchValue] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
-  const [searchSite, setSearchSite] = useState('书海旅人');
+  const [searchSite, setSearchSite] = useState('一单书');
   const [externalSearchUrl, setExternalSearchUrl] = useState('');
   const [showExternalContent, setShowExternalContent] = useState(false);
   const [isExternalLoading, setIsExternalLoading] = useState(false);
@@ -39,10 +39,10 @@ export default function Home({ postsToShow }) {
 
   // 预定义搜索站点
   const searchSites = [
+    { id: '一单书', name: '一单书', placeholder: '在一单书搜索...', url: 'https://yidanshu.com/sobook/{searchTerm}' },
+    { id: '读书派', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}'},
     { id: '书海旅人', name: '书海旅人', placeholder: '在书海旅人搜索...', url: 'https://bookplusapp.top/books?key={searchTerm}'},
     { id: '爱悦读', name: '爱悦读', placeholder: '在爱悦读搜索...', url: 'https://www.iyd.wang/?s={searchTerm}'},
-    { id: '读书派', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}'},
-    { id: '一单书', name: '一单书', placeholder: '在一单书搜索...', url: 'https://yidanshu.com/sobook/{searchTerm}' },
     { id: '站内', name: '站内搜索', placeholder: '搜索资源...' }
   ];
 
