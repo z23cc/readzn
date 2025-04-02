@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BlogPost from '@/components/BlogPost'
 import Container from '@/components/Container'
 import Tags from '@/components/Tags'
 import PropTypes from 'prop-types'
 
-const SearchLayout = ({ tags, posts, currentTag }) => {
-  const [searchValue, setSearchValue] = useState('')
+const SearchLayout = ({ tags, posts, currentTag, initialSearchValue = '' }) => {
+  const [searchValue, setSearchValue] = useState(initialSearchValue)
+
+  // 当initialSearchValue变化时更新搜索值
+  useEffect(() => {
+    if (initialSearchValue) {
+      setSearchValue(initialSearchValue)
+    }
+  }, [initialSearchValue])
   let filteredBlogPosts = []
   if (posts) {
     filteredBlogPosts = posts.filter(post => {
@@ -59,6 +66,7 @@ const SearchLayout = ({ tags, posts, currentTag }) => {
 SearchLayout.propTypes = {
   posts: PropTypes.array.isRequired,
   tags: PropTypes.object.isRequired,
-  currentTag: PropTypes.string
+  currentTag: PropTypes.string,
+  initialSearchValue: PropTypes.string
 }
 export default SearchLayout
