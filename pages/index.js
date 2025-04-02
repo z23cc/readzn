@@ -39,9 +39,10 @@ export default function Home({ postsToShow }) {
 
   // 预定义搜索站点
   const searchSites = [
+    { id: '书海旅人', name: '书海旅人', placeholder: '在书海旅人搜索...', url: 'https://bookplusapp.top/books?key={searchTerm}'},
+    { id: '爱悦读', name: '爱悦读', placeholder: '在爱悦读搜索...', url: 'https://www.iyd.wang/?s={searchTerm}'},
+    { id: '读书派', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}'},
     { id: '一单书', name: '一单书', placeholder: '在一单书搜索...', url: 'https://yidanshu.com/sobook/{searchTerm}' },
-    { id: '百度', name: '百度', placeholder: '在百度搜索...', url: 'https://www.baidu.com/s?wd={searchTerm}' },
-    { id: 'Google', name: 'Google', placeholder: '在Google搜索...', url: 'https://www.google.com/search?q={searchTerm}' },
     { id: '站内', name: '站内搜索', placeholder: '搜索资源...' }
   ];
 
@@ -98,6 +99,41 @@ export default function Home({ postsToShow }) {
     setShowSearchResults(false);
     setShowExternalContent(false);
     setExternalSearchUrl('');
+    
+    // 如果搜索框有内容，自动触发搜索
+    if (searchValue.trim() !== '') {
+      // 延迟执行以确保状态更新
+      setTimeout(() => {
+        if (siteId === '站内') {
+          if (searchInNewTab) {
+            // 在新标签页打开站内搜索结果
+            const searchParams = new URLSearchParams();
+            searchParams.append('q', searchValue);
+            window.open(`/search?${searchParams.toString()}`, '_blank');
+          } else {
+            // 在当前页面显示搜索结果
+            setShowSearchResults(true);
+            setShowExternalContent(false);
+          }
+        } else {
+          const selectedSite = searchSites.find(site => site.id === siteId);
+          if (selectedSite && selectedSite.url) {
+            const url = selectedSite.url.replace('{searchTerm}', encodeURIComponent(searchValue));
+            if (searchInNewTab) {
+              // 在新标签页打开外部搜索
+              window.open(url, '_blank');
+            } else {
+              // 使用代理API在当前页面加载外部搜索结果
+              const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
+              setExternalSearchUrl(proxyUrl);
+              setShowSearchResults(false);
+              setShowExternalContent(true);
+              setIsExternalLoading(true);
+            }
+          }
+        }
+      }, 0);
+    }
   };
 
   // 切换搜索结果显示模式
