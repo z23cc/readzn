@@ -31,7 +31,7 @@ export default function Home({ postsToShow }) {
   const [activeCategory, setActiveCategory] = useState('zlibrary专栏');
   const [searchValue, setSearchValue] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
-  const [searchSite, setSearchSite] = useState('一单书');
+  const [searchSite, setSearchSite] = useState('书海旅人');
   const [externalSearchUrl, setExternalSearchUrl] = useState('');
   const [showExternalContent, setShowExternalContent] = useState(false);
   const [isExternalLoading, setIsExternalLoading] = useState(false);
@@ -296,23 +296,25 @@ export default function Home({ postsToShow }) {
               {searchResults.length > 0 ? (
                 searchResults.map((resource, index) => (
                   <div key={index} className={styles.resourceCard}>
-                    <div className={styles.cardImage}>
-                      <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
-                      {resource.up && resource.up.includes('up') && (
-                        <div className={styles.officialRecommend}>✓ 官方推荐</div>
-                      )}
-                    </div>
-                    <div className={styles.cardContent}>
-                      <h3 className={styles.cardTitle}>{resource.title}</h3>
-                      <p className={styles.cardDescription}>{resource.summary || resource.description}</p>
-                      <div className={styles.cardTags}>
-                        {resource.tags && resource.tags.map((tag, tagIndex) => (
-                          <span key={tagIndex} className={styles.cardTag}>{tag}</span>
-                        ))}
+                    <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                      <div className={styles.cardImage}>
+                        <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
+                        {resource.up && resource.up.includes('up') && (
+                          <div className={styles.officialRecommend}>✓ 官方推荐</div>
+                        )}
                       </div>
-                      <LinkStatus url={resource.link || '#'} />
-                      <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>立即访问</a>
-                    </div>
+                      <div className={styles.cardContent}>
+                        <h3 className={styles.cardTitle}>{resource.title}</h3>
+                        <p className={styles.cardDescription}>{resource.summary || resource.description}</p>
+                        <div className={styles.cardTags}>
+                          {resource.tags && resource.tags.map((tag, tagIndex) => (
+                            <span key={tagIndex} className={styles.cardTag}>{tag}</span>
+                          ))}
+                        </div>
+                        <LinkStatus url={resource.link || '#'} />
+                        <span className={styles.cardLink}>立即访问</span>
+                      </div>
+                    </a>
                   </div>
                 ))
               ) : (
@@ -378,24 +380,26 @@ export default function Home({ postsToShow }) {
                 <div className={styles.resourceGrid}>
                   {resources[category.id]?.map((resource, index) => (
                     <div key={index} className={styles.resourceCard}>
-                      <div className={styles.cardImage}>
-                        <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
-                        {resource.up && resource.up.includes('up') && (
-                          <div className={styles.officialRecommend}>✓ 官方推荐</div>
-                        )}
-                      </div>
-                      <div className={styles.cardContent}>
-                        <h3 className={styles.cardTitle}>{resource.title}</h3>
-                        <p className={styles.cardDescription}>{resource.description}</p>
-                        <div className={styles.cardTags}>
-                          {resource.tags.map((tag, tagIndex) => (
-                            <span key={tagIndex} className={styles.cardTag}>{tag}</span>
-                          ))}
+                      <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <div className={styles.cardImage}>
+                          <Image src={resource.image} alt={resource.title} layout="fill" objectFit="cover" />
+                          {resource.up && resource.up.includes('up') && (
+                            <div className={styles.officialRecommend}>✓ 官方推荐</div>
+                          )}
                         </div>
-                        {/* 添加链接状态指示器 */}
-                        <LinkStatus url={resource.link || '#'} />
-                        <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>立即访问</a>
-                      </div>
+                        <div className={styles.cardContent}>
+                          <h3 className={styles.cardTitle}>{resource.title}</h3>
+                          <p className={styles.cardDescription}>{resource.description}</p>
+                          <div className={styles.cardTags}>
+                            {resource.tags.map((tag, tagIndex) => (
+                              <span key={tagIndex} className={styles.cardTag}>{tag}</span>
+                            ))}
+                          </div>
+                          {/* 添加链接状态指示器 */}
+                          <LinkStatus url={resource.link || '#'} />
+                          <span className={styles.cardLink}>立即访问</span>
+                        </div>
+                      </a>
                     </div>
                   ))}
                 </div>
