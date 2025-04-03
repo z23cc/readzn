@@ -43,8 +43,9 @@ export default function Home({ postsToShow }) {
   // 预定义搜索站点
   const searchSites = [
     { id: '一单书', category: '电子书', name: '一单书', placeholder: '在一单书搜索...', url: 'https://yidanshu.com/sobook/{searchTerm}' },
-    { id: '读书派', category: '电子书', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}' },
+    { id: 'Z-Library', category: '电子书', name: 'Z-Library', placeholder: '在Z-Library搜索...', url: 'https://zh.101ml.fun/s/{searchTerm}?' },
     { id: '书海旅人', category: '电子书', name: '书海旅人', placeholder: '在书海旅人搜索...', url: 'https://bookplusapp.top/books?key={searchTerm}' },
+    { id: '读书派', category: '电子书', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}' },
     { id: '爱悦读', category: '电子书', name: '爱悦读', placeholder: '在爱悦读搜索...', url: 'https://www.iyd.wang/?s={searchTerm}' },
     { id: '站内', category: '电子书', name: '站内搜索', placeholder: '搜索资源...' },
     { id: '漫画柜', category: '漫画绘本', name: '漫画柜', placeholder: '在漫画柜搜索...', url: 'https://www.manhuagui.com/s/{searchTerm}.html' },
