@@ -14,6 +14,7 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
   const [currentSiteCategory, setCurrentSiteCategory] = useState('电子书');
   const [recommendedBook, setRecommendedBook] = useState(null);
   const [placeholderText, setPlaceholderText] = useState('');
+  const [isRandomLoading, setIsRandomLoading] = useState(false);
 
   // 预定义推荐书籍列表（按分类）
   const recommendedBooks = {
@@ -85,6 +86,43 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
       return recommendedBooks[category][randomIndex];
     }
     return null;
+  };
+
+  // 获取随机书籍推荐
+  const fetchRandomBook = async () => {
+    // 只有电子书类别支持随机选书API
+    if (currentSiteCategory !== '电子书') {
+      return;
+    }
+
+    setIsRandomLoading(true);
+    try {
+      // 使用Next.js API路由代理请求，避免CORS问题
+      const proxyUrl = `/api/proxy?url=${encodeURIComponent('https://xiayibendushenme.com/api/bookbeans/random')}`;
+      const response = await fetch(proxyUrl);
+      const data = await response.json();
+
+      if (Array.isArray(data) && data.length > 0) {
+        const randomBook = data[0];
+        // 更新搜索框placeholder
+        const selectedSite = searchSites.find(site => site.id === searchSite);
+        if (selectedSite) {
+          const cleanTitle = randomBook.title.replace(/[《》]/g, '');
+          setPlaceholderText(`在${selectedSite.name}搜索《${cleanTitle}》评级${randomBook.score}星`);
+        }
+
+        // 更新推荐书籍
+        setRecommendedBook({
+          title: randomBook.title.replace(/《|》/g, ''), // 移除书名中的书名号
+          rating: randomBook.score,
+          ratingText: `评级${randomBook.score}星`
+        });
+      }
+    } catch (error) {
+      console.error('获取随机书籍数据失败:', error);
+    } finally {
+      setIsRandomLoading(false);
+    }
   };
 
   // 从豆瓣API获取新书数据并更新推荐书籍和placeholder
@@ -393,23 +431,45 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
 
         {/* 搜索输入框和按钮 */}
         <div className={styles.searchInputWrapper}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder={placeholderText || '搜索...'}
-            value={searchValue}
-            onChange={handleSearchInput}
-          />
-          {searchValue && (
+          <div className={styles.inputWithIcon}>
+            {/* 随机选书图标 */}
             <button
               type="button"
-              className={styles.clearSearchBtn}
-              onClick={clearSearch}
-              aria-label="清除搜索"
+              className={styles.randomBookBtn}
+              onClick={fetchRandomBook}
+              aria-label="随机选书"
+              title="随机选书"
+              disabled={isRandomLoading || currentSiteCategory !== '电子书'}
             >
-              ×
+              {isRandomLoading ? (
+                <span className={styles.randomLoading}></span>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 2v6h6"></path>
+                  <path d="M21 12A9 9 0 0 0 6 5.3L3 8"></path>
+                  <path d="M21 22v-6h-6"></path>
+                  <path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"></path>
+                </svg>
+              )}
             </button>
-          )}
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder={placeholderText || '搜索...'}
+              value={searchValue}
+              onChange={handleSearchInput}
+            />
+            {searchValue && (
+              <button
+                type="button"
+                className={styles.clearSearchBtn}
+                onClick={clearSearch}
+                aria-label="清除搜索"
+              >
+                ×
+              </button>
+            )}
+          </div>
           <button type="submit" className={styles.searchSubmitBtn}>
             搜索
           </button>
