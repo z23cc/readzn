@@ -120,6 +120,10 @@ export default function Home({ postsToShow }) {
           additionalLinkTags={[
             {
               rel: 'icon',
+              href: '/favicon.ico',
+            },
+            {
+              rel: 'icon',
               href: '/favicon.png',
             },
             {

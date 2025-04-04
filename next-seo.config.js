@@ -44,6 +44,10 @@ const SEO = {
   additionalLinkTags: [
     {
       rel: 'icon',
+      href: '/favicon.ico',
+    },
+    {
+      rel: 'icon',
       href: '/favicon.png',
     },
     {
