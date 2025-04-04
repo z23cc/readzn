@@ -19,6 +19,7 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
   // 预定义推荐书籍列表（按分类）
   const recommendedBooks = {
     '电子书': [
+      { title: '小米创业思考', rating: '8.2', ratingText: "豆瓣{ratingTerm}分" },
       { title: '如何找到想做的事', rating: '7.5', ratingText: "豆瓣新书{ratingTerm}分" },
       // 其他电子书...
     ],
@@ -35,16 +36,18 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
       { title: '龙珠' }
     ],
     '小说': [
-      { title: '三体' },
-      { title: '活着' },
-      { title: '百年孤独' },
-      { title: '围城' },
-      { title: '平凡的世界' },
-      { title: '红楼梦' },
-      { title: '白夜行' },
-      { title: '嫌疑人X的献身' },
-      { title: '解忧杂货店' },
-      { title: '追风筝的人' }
+      { title: '剑来' },
+      { title: '我的武魂是盘古' },
+      { title: '我把全修真界卷哭了' },
+      { title: '大奉打更人' },
+      { title: '顶A校草的阴郁beta室友' },
+      { title: '问鼎仙缘' },
+      { title: '向阳小镇' },
+      { title: '大爱仙尊' },
+      { title: '沉船' },
+      { title: '凡人修仙传' },
+      { title: '仙逆' },
+      { title: '一念永恒' }
     ],
     '学术期刊': [
       { title: '人工智能发展趋势' },
@@ -67,13 +70,18 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
     { id: '书海旅人', category: '电子书', name: '书海旅人', placeholder: '在书海旅人搜索...', url: 'https://bookplusapp.top/books?key={searchTerm}' },
     { id: '读书派', category: '电子书', name: '读书派', placeholder: '在读书派搜索...', url: 'https://www.dushupai.com/search.html?k={searchTerm}' },
     { id: '爱悦读', category: '电子书', name: '爱悦读', placeholder: '在爱悦读搜索...', url: 'https://www.iyd.wang/?s={searchTerm}' },
-    { id: '站内', category: '电子书', name: '站内搜索', placeholder: '搜索资源...' },
-    { id: '漫画柜', category: '漫画绘本', name: '漫画柜', placeholder: '在漫画柜搜索...', url: 'https://www.manhuagui.com/s/{searchTerm}.html' },
+    { id: '包子漫画', category: '漫画绘本', name: '包子漫画', placeholder: '在包子漫画搜索...', url: 'https://cn.baozimhcn.com/search?q={searchTerm}' },
+    { id: 'GoDa漫画', category: '漫画绘本', name: 'GoDa漫画', placeholder: '在GoDa漫画搜索...', url: 'https://godamh.com/s/{searchTerm}' },
+    { id: 'MYCOMIC', category: '漫画绘本', name: 'MYCOMIC', placeholder: '在MYCOMIC搜索...', url: 'https://mycomic.com/cn/comics?q={searchTerm}' },
+    { id: '漫本', category: '漫画绘本', name: '漫本', placeholder: '在漫本搜索...', url: 'https://www.manben.com/search?title={searchTerm}&language=1' },
+    { id: '漫自由', category: '漫画绘本', name: '漫自由', placeholder: '在漫自由搜索...', url: 'https://mhx12.com/m/comic/search?q={searchTerm}' },
     { id: '动漫之家', category: '漫画绘本', name: '动漫之家', placeholder: '在动漫之家搜索...', url: 'https://manhua.dmzj.com/tags/search.shtml?s={searchTerm}' },
-    { id: '漫画DB', category: '漫画绘本', name: '漫画DB', placeholder: '在漫画DB搜索...', url: 'https://www.manhuadb.com/search?q={searchTerm}' },
-    { id: '轻小说文库', category: '小说', name: '轻小说文库', placeholder: '在轻小说文库搜索...', url: 'https://www.wenku8.net/modules/article/search.php?searchtype=articlename&searchkey={searchTerm}' },
+    { id: '拷贝漫画', category: '漫画绘本', name: '拷贝漫画', placeholder: '在拷贝漫画搜索...', url: 'https://www.mangacopy.com/search?q={searchTerm}&q_type=' },
+    { id: '笔趣阁', category: '小说', name: '笔趣阁', placeholder: '在笔趣阁搜索...', url: 'https://www.mfxs0.cn/?pbcode/so/{searchTerm}' },
+    { id: '新书阁', category: '小说', name: '新书阁', placeholder: '在新书阁搜索...', url: 'https://www.xinshuge.xyz/search/{searchTerm}.html' },
+    { id: '万本小说', category: '小说', name: '万本小说', placeholder: '在万本小说搜索...', url: 'https://www.10000txt.com/search.php?q={searchTerm}' },
+    { id: '知轩藏书', category: '小说', name: '知轩藏书', placeholder: '在知轩藏书搜索...', url: 'https://zxcs.info/search/index/init.html?q={searchTerm}&modelid=0' },
     { id: '起点中文网', category: '小说', name: '起点中文网', placeholder: '在起点中文网搜索...', url: 'https://www.qidian.com/search?kw={searchTerm}' },
-    { id: '纵横中文网', category: '小说', name: '纵横中文网', placeholder: '在纵横中文网搜索...', url: 'https://search.zongheng.com/search/all/{searchTerm}' },
     { id: '知网', category: '学术期刊', name: '中国知网', placeholder: '在中国知网搜索...', url: 'https://kns.cnki.net/kns8/defaultresult/index?kw={searchTerm}' },
     { id: '万方', category: '学术期刊', name: '万方数据', placeholder: '在万方数据搜索...', url: 'https://www.wanfangdata.com.cn/search/searchList.do?searchType=all&searchWord={searchTerm}' },
     { id: '维普', category: '学术期刊', name: '维普期刊', placeholder: '在维普期刊搜索...', url: 'http://qikan.cqvip.com/Qikan/Search/Index?key={searchTerm}' }

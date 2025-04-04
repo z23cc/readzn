@@ -1,10 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import LazyImage from '@/components/LazyImage';
 import styles from '@/styles/BookGuide.module.css';
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import Link from "next/link";
 import { useConfig } from "@/lib/config";
 import { getAllPosts } from '@/lib/notion';
 import { clientConfig } from '@/lib/server/config';
