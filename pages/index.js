@@ -1,7 +1,7 @@
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import LazyImage from '@/components/LazyImage';
 import styles from '@/styles/BookGuide.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import { useConfig } from "@/lib/config";
 import { getAllPosts } from '@/lib/notion';
@@ -11,6 +11,7 @@ import SiteInfo from '@/components/SiteInfo';
 import LinkStatus from '@/components/LinkStatus';
 import DefaultCover from '@/components/DefaultCover';
 import SearchComponent from '@/components/SearchComponent';
+import { useRouter } from 'next/router';
 
 export async function getStaticProps() {
   const posts = await getAllPosts({ includePages: false, owner: 'resource_nav' })
@@ -29,7 +30,16 @@ export async function getStaticProps() {
 
 export default function Home({ postsToShow }) {
   const BLOG = useConfig();
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState('zlibrary专栏');
+
+  // 当页面加载完成后，如果URL中有锚点，滚动到对应区域
+  useEffect(() => {
+    if (router.asPath.includes('#')) {
+      const id = router.asPath.split('#')[1];
+      scrollToSection(id);
+    }
+  }, [router.asPath]);
 
   // 滚动到指定区域
   const scrollToSection = (id) => {
@@ -76,27 +86,83 @@ export default function Home({ postsToShow }) {
   return (
     <Layout>
       <div className={styles.container}>
-        <Head>
-          <title>阅读指南 - 发现优质阅读资源</title>
-          <meta name="description" content="发现和探索全球优质的电子书、有声读物、学术论文和杂志资源网站，让阅读更便捷。" />
-          <meta name="keywords" content="阅读指南, 电子书资源, Z-Library, 学术论文, 有声读物, 免费电子书, 阅读资源导航" />
-          <link rel="icon" href="/favicon.png" />
-          <link rel="icon" href="/favicon.dark.png" media="(prefers-color-scheme: dark)" />
-
-          {/* Open Graph标签 */}
-          <meta property="og:title" content="阅读指南 - 发现优质阅读资源" />
-          <meta property="og:description" content="发现和探索全球优质的电子书、有声读物、学术论文和杂志资源网站，让阅读更便捷。" />
-          <meta property="og:image" content="/og-image.jpg" />
-          <meta property="og:url" content={`${BLOG.link}`} />
-
-          {/* Twitter Cards */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="阅读指南 - 发现优质阅读资源" />
-          <meta name="twitter:description" content="发现和探索全球优质的电子书、有声读物、学术论文和杂志资源网站，让阅读更便捷。" />
-
-          {/* 规范链接 */}
-          <link rel="canonical" href={`${BLOG.link}`} />
-        </Head>
+        <NextSeo
+          title="阅读指南 - 发现全球优质电子书、漫画绘本、小说与学术资源 | 免费阅读导航"
+          description="阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。"
+          canonical={`${BLOG.link}`}
+          openGraph={{
+            title: "阅读指南 - 发现全球优质电子书、漫画绘本、小说与学术资源 | 免费阅读导航",
+            description: "阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。",
+            url: `${BLOG.link}`,
+            type: "website",
+            images: [
+              {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "阅读指南",
+              },
+            ],
+          }}
+          twitter={{
+            cardType: "summary_large_image",
+          }}
+          additionalMetaTags={[
+            {
+              name: "keywords",
+              content: "阅读指南,电子书资源,漫画绘本,儿童绘本,小说,网络小说,Z-Library,学术论文,有声读物,免费电子书,阅读资源导航,电子书下载,学术资源,知识获取"
+            },
+            {
+              name: "robots",
+              content: "index, follow"
+            }
+          ]}
+          additionalLinkTags={[
+            {
+              rel: 'icon',
+              href: '/favicon.png',
+            },
+            {
+              rel: 'icon',
+              href: '/favicon.dark.png',
+              media: '(prefers-color-scheme: dark)',
+            },
+          ]}
+          jsonLd={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "阅读指南",
+            "url": `${BLOG.link}`,
+            "description": "阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": `${BLOG.link}/search?q={search_term_string}`,
+              "query-input": "required name=search_term_string"
+            },
+            "about": [
+              {
+                "@type": "Thing",
+                "name": "电子书",
+                "description": "各类电子书资源"
+              },
+              {
+                "@type": "Thing",
+                "name": "小说",
+                "description": "各类网络小说和文学作品"
+              },
+              {
+                "@type": "Thing",
+                "name": "漫画绘本",
+                "description": "漫画和儿童绘本资源"
+              },
+              {
+                "@type": "Thing",
+                "name": "学术资源",
+                "description": "学术论文和研究资料"
+              }
+            ]
+          }}
+        />
 
         {/* 顶部横幅 */}
         <div className={styles.hero}>
@@ -139,7 +205,11 @@ export default function Home({ postsToShow }) {
                         <a href={`/sites/${resource.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', height: '100%' }}>
                           <div className={styles.cardImage}>
                             {resource.image ? (
-                              <LazyImage src={resource.image} alt={resource.title} title={resource.title} />
+                              <LazyImage
+                                src={resource.image}
+                                alt={`${resource.title} - ${resource.description || '阅读资源'}`}
+                                title={resource.title}
+                              />
                             ) : (
                               <DefaultCover title={resource.title} />
                             )}

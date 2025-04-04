@@ -6,11 +6,13 @@ import { getAllPosts, getPostBlocks } from '@/lib/notion'
 import { useLocale } from '@/lib/locale'
 import { useConfig } from '@/lib/config'
 import { createHash } from 'crypto'
-import Container from '@/components/Container'
+import { NextSeo } from 'next-seo'
+import Layout from '@/components/Layout'
 import SitesPost from '@/components/SitesPost'
 import Comments from '@/components/Comments'
+import styles from '@/styles/Container.module.css';
 
-export default function BlogPost ({ post, blockMap, emailHash }) {
+export default function BlogPost({ post, blockMap, emailHash }) {
   const router = useRouter()
   const BLOG = useConfig()
   const locale = useLocale()
@@ -21,55 +23,73 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
   const fullWidth = post.fullWidth ?? false
 
   return (
-    <Container
-      layout="blog"
-      title={post.title}
-      description={post.summary}
-      slug={post.slug}
-      // date={new Date(post.publishedAt).toISOString()}
-      type="article"
-      fullWidth={fullWidth}
-    >
-      <SitesPost
-        post={post}
-        blockMap={blockMap}
-        emailHash={emailHash}
-        fullWidth={fullWidth}
+    <Layout>
+      <NextSeo
+        title={post.title}
+        description={post.summary}
+        canonical={`${BLOG.link}/${post.slug}`}
+        openGraph={{
+          title: post.title,
+          description: post.summary,
+          url: `${BLOG.link}/${post.slug}`,
+          type: 'article',
+          images: [
+            {
+              url: `${BLOG.ogImageGenerateURL}/${encodeURIComponent(
+                post.title
+              )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Freadzn.com%2Ffavicon.png`,
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
       />
-      {/* Back and Top */}
-      <div
-        className={cn(
-          'px-4 flex justify-between font-medium text-gray-500 dark:text-gray-400 my-5',
-          fullWidth ? 'md:px-24' : 'mx-auto max-w-2xl'
-        )}
-      >
-        <a>
-          <button
-            onClick={() => router.push(BLOG.path || '/')}
-            className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
-          >
-            ← {locale.POST.BACK}
-          </button>
-        </a>
-        <a>
-          <button
-            onClick={() => window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            })}
-            className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
-          >
-            ↑ {locale.POST.TOP}
-          </button>
-        </a>
-      </div>
+      <div className={styles.baseContainer}>
+        <SitesPost
+          post={post}
+          blockMap={blockMap}
+          emailHash={emailHash}
+          fullWidth={fullWidth}
+        />
+        {/* Back and Top */}
+        <div
+          className={cn(
+            'px-4 flex justify-between font-medium text-gray-500 dark:text-gray-400 my-5',
+            fullWidth ? 'md:px-24' : 'mx-auto max-w-2xl'
+          )}
+        >
+          <a>
+            <button
+              onClick={() => router.push(BLOG.path || '/')}
+              className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
+            >
+              ← {locale.POST.BACK}
+            </button>
+          </a>
+          <a>
+            <button
+              onClick={() => window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              })}
+              className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
+            >
+              ↑ {locale.POST.TOP}
+            </button>
+          </a>
+        </div>
 
-      <Comments frontMatter={post} />
-    </Container>
+        <Comments frontMatter={post} />
+      </div>
+    </Layout>
   )
 }
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
   const posts = await getAllPosts({ includePages: true })
   return {
     paths: posts.map(row => ({ params: { slug: row.slug } })),
@@ -77,7 +97,7 @@ export async function getStaticPaths () {
   }
 }
 
-export async function getStaticProps ({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
   const posts = await getAllPosts({ includePages: true })
   const post = posts.find(t => t.slug === slug)
 

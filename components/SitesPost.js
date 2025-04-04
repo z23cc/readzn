@@ -32,7 +32,7 @@ export default function SitesPost(props) {
   return (
     <article className={cn('flex flex-col', fullWidth ? 'md:px-24' : 'items-center')}>
       {/* 整合标题与网站信息区域 */}
-      <div className={cn(styles.siteInfoContainer, { [styles.dark]: dark })}>
+      <div className={cn(styles.siteInfoContainer, { [styles.light]: dark })}>
         <div className={cn(styles.siteMetaInfo, { 'max-w-2xl': !fullWidth })}>
           {post.type[0] !== 'Page' && (
             <div className={styles.siteMetaData}>
@@ -94,7 +94,7 @@ export default function SitesPost(props) {
       </div>
 
       {/* 教程内容 */}
-      <div className={cn(styles.tutorialSection, { [styles.dark]: dark })}>
+      <div className={cn(styles.tutorialSection, { [styles.light]: dark })}>
         <h2 className={styles.tutorialTitle}>使用教程与说明</h2>
         <div className="self-stretch flex flex-col items-center lg:flex-row lg:items-stretch">
           {!fullWidth && <div className="flex-1 hidden lg:block" />}

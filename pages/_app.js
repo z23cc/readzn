@@ -9,8 +9,11 @@ import loadLocale from '@/assets/i18n'
 import { ConfigProvider } from '@/lib/config'
 import { LocaleProvider } from '@/lib/locale'
 import { prepareDayjs } from '@/lib/dayjs'
-import { ThemeProvider } from '@/lib/theme'
+import { ThemeProvider } from 'next-themes'
 import Scripts from '@/components/Scripts'
+import { useConfig } from '@/lib/config'
+import { DefaultSeo } from 'next-seo'
+import SEO from '../next-seo.config'
 
 const Ackee = dynamic(() => import('@/components/Ackee'), { ssr: false })
 const Gtag = dynamic(() => import('@/components/Gtag'), { ssr: false })
@@ -22,6 +25,7 @@ export default function MyApp ({ Component, pageProps, config, locale }) {
       <LocaleProvider value={locale}>
         <ThemeProvider>
           <>
+            <DefaultSeo {...SEO} />
             {process.env.VERCEL_ENV === 'production' && config?.analytics?.provider === 'ackee' && (
               <Ackee
                 ackeeServerUrl={config.analytics.ackeeConfig.dataAckeeServer}
