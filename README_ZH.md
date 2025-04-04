@@ -100,6 +100,12 @@ pnpm format  # Prettier格式化
 
 MIT License © 2025 [Readzn]
 
+## 支持我们
+
+如果您觉得这个项目对您有帮助，欢迎请我们喝杯咖啡：
+
+<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="支持Readzn">
+
 ## 联系我们
 📧 反馈邮箱：hyperfunc@protonmail.com
 🐞 Bug提交：https://github.com/ChrisHyperFunc/readzn/issues

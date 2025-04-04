@@ -98,6 +98,12 @@ pnpm format  # Prettier formatting
 
 MIT License © 2025 [Readzn]
 
+## Support Us
+
+If you find this project helpful, you can support us by buying us a coffee:
+
+<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="Support Readzn">
+
 ## Contact Us
 📧 Feedback Email: hyperfunc@protonmail.com
 🐞 Bug Report: https://github.com/ChrisHyperFunc/readzn/issues
