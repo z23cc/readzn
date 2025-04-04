@@ -87,11 +87,11 @@ export default function Home({ postsToShow }) {
     <Layout>
       <div className={styles.container}>
         <NextSeo
-          title="阅读指南 - 发现全球优质电子书、漫画绘本、小说与学术资源 | 免费阅读导航"
+          title="阅读指南 - 发现全球优质免费电子书、漫画绘本、小说与教育学术资源"
           description="阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。"
           canonical={`${BLOG.link}`}
           openGraph={{
-            title: "阅读指南 - 发现全球优质电子书、漫画绘本、小说与学术资源 | 免费阅读导航",
+            title: "阅读指南 - 发现全球优质免费电子书、漫画绘本、小说与教育学术资源",
             description: "阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。",
             url: `${BLOG.link}`,
             type: "website",
