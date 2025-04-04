@@ -496,7 +496,7 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
               <div key={post.id} className={styles.resourceCard}>
                 <div className={styles.cardImage}>
                   {post.image ? (
-                    <LazyImage src={post.image} alt={post.title} width={300} height={120} />
+                    <LazyImage src={post.image} alt={post.title} width={300} height={120} crossOrigin="anonymous" />
                   ) : (
                     <DefaultCover title={post.title} />
                   )}

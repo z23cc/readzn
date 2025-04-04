@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import DefaultCover from './DefaultCover';
 
 /**
  * 懒加载图片组件
  * 只有当组件进入视口时才加载真实图片，初始状态显示默认封面
+ * 直接使用img标签而不是Next.js的Image组件，避免服务器代理加载图片
+ * 优化：移除crossOrigin属性，避免不必要的CORS预检请求，提高图片加载性能
+ * 图片直接从CDN加载，而不是通过服务器代理，减少服务器负担
  * @param {Object} props
  * @param {string} props.src - 图片源URL
  * @param {string} props.alt - 图片替代文本
  * @param {string} props.title - 用于生成默认封面的标题
- * @param {string} props.layout - Next.js Image布局模式
  * @param {string} props.objectFit - 图片适应方式
- * @param {Object} props.rest - 其他传递给Image组件的属性
+ * @param {Object} props.rest - 其他传递给img标签的属性
  */
 const LazyImage = ({ src, alt, title, layout, objectFit, ...rest }) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -76,11 +77,9 @@ const LazyImage = ({ src, alt, title, layout, objectFit, ...rest }) => {
 
       {/* 当组件进入视口时加载真实图片 */}
       {isIntersecting && (
-        <Image
+        <img
           src={src}
           alt={alt || title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           onLoad={handleImageLoad}
           onError={handleImageError}
           style={{
@@ -92,7 +91,7 @@ const LazyImage = ({ src, alt, title, layout, objectFit, ...rest }) => {
             height: '100%',
             position: 'absolute'
           }}
-          priority={false}
+          loading="lazy"
           {...rest}
         />
       )}

@@ -209,6 +209,7 @@ export default function Home({ postsToShow }) {
                                 src={resource.image}
                                 alt={`${resource.title} - ${resource.description || '阅读资源'}`}
                                 title={resource.title}
+                                crossOrigin="anonymous"
                               />
                             ) : (
                               <DefaultCover title={resource.title} />
