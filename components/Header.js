@@ -25,6 +25,7 @@ export default function Header({navBarTitle, fullWidth}) {
           {/* <li><Link title="Browse our latest articles" href="/articles">Kindle专栏</Link></li> */}
           {/* <li><Link title="Explore Tao Books" href="/tao-books">阅读器测评</Link></li> */}
           {/* <li><Link title="Online Books Converter" href="/book-converter">在线格式转换</Link></li> */}
+          <li><Link title="Donate Support" href="/donate-support" target='_blank'>捐赠</Link></li>
           <li><Link title="Contact Us" href="/contact">关于我们</Link></li>
           <li>
             <a
