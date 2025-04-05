@@ -10,6 +10,7 @@ import Layout from '@/components/Layout'
 import SitesPost from '@/components/SitesPost'
 import Comments from '@/components/Comments'
 import styles from '@/styles/Container.module.css';
+import { NextSeo } from 'next-seo'
 
 export default function BlogPost({ post, blockMap, emailHash }) {
   const router = useRouter()
@@ -23,6 +24,30 @@ export default function BlogPost({ post, blockMap, emailHash }) {
 
   return (
     <Layout>
+      <NextSeo
+        title={post.title}
+        description={post.summary}
+        canonical={`${BLOG.link}/${post.slug}`}
+        openGraph={{
+          title: post.title,
+          description: post.summary,
+          url: `${BLOG.link}/${post.slug}`,
+          type: 'article',
+          images: [
+            {
+              url: `${BLOG.ogImageGenerateURL}/${encodeURIComponent(
+                post.title
+              )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Freadzn.com%2Ffavicon.png`,
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
       <div className={styles.baseContainer}>
         <SitesPost
           post={post}
