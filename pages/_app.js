@@ -48,9 +48,12 @@ MyApp.getInitialProps = async ctx => {
 
   prepareDayjs(config.timezone)
 
+  // 确保config.lang有值，如果没有则使用默认值'zh-CN'
+  const lang = config.lang || 'zh-CN';
+
   return {
     ...App.getInitialProps(ctx),
     config,
-    locale: await loadLocale('basic', config.lang)
+    locale: await loadLocale('basic', lang)
   }
 }
