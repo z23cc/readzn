@@ -1,5 +1,19 @@
 // next-seo.config.js
-const BLOG = require('./blog.config')
+let BLOG
+
+try {
+  // 尝试直接导入配置
+  BLOG = require('./blog.config')
+} catch (error) {
+  console.error('无法加载 blog.config.js，使用默认配置')
+  // 提供默认配置以防止错误
+  BLOG = {
+    title: '默认标题',
+    link: 'https://example.com',
+    author: '默认作者',
+    seo: { keywords: [] }
+  }
+}
 
 const SEO = {
   titleTemplate: `%s | ${BLOG.title}`,
