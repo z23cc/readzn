@@ -7,7 +7,7 @@ export default function Header({navBarTitle, fullWidth}) {
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link href="/">
-          <Image src="/readzn-logo.png" alt="readzn.com Logo" width={40} height={40}/>
+          <Image src="/logo.png" alt="readzn.com Logo" width={40} height={40}/>
         </Link>
         <div className={styles.titleContainer}>
           <h1>{navBarTitle || "阅读指南"}</h1>
