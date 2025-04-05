@@ -3,16 +3,16 @@ const BLOG = require('./blog.config')
 
 const SEO = {
   titleTemplate: `%s | ${BLOG.title}`,
-  defaultTitle: `${BLOG.title} - 发现全球优质电子书、漫画绘本、小说与学术资源 | 免费阅读导航`,
-  description: '阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。',
+  defaultTitle: `${BLOG.title} - 发现全球优质免费电子书、漫画绘本、小说与教育学术资源`,
+  description: '阅读指南为您精选全球优质免费电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。',
   canonical: BLOG.link,
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
     url: BLOG.link,
     siteName: BLOG.title,
-    title: `${BLOG.title} - 发现全球优质电子书、漫画绘本、小说与学术资源 | 免费阅读导航`,
-    description: '阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。',
+    title: `${BLOG.title} - 发现全球优质免费电子书、漫画绘本、小说与教育学术资源`,
+    description: '阅读指南为您精选全球优质免费电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。',
     images: [
       {
         url: `${BLOG.link}/og-image.jpg`,
