@@ -1,4 +1,3 @@
-import { NextSeo } from 'next-seo';
 import LazyImage from '@/components/LazyImage';
 import styles from '@/styles/BookGuide.module.css';
 import { useState, useEffect } from 'react';
@@ -86,88 +85,6 @@ export default function Home({ postsToShow }) {
   return (
     <Layout>
       <div className={styles.container}>
-        <NextSeo
-          title="阅读指南 - 发现全球优质免费电子书、漫画绘本、小说与教育学术资源"
-          description="阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。"
-          canonical={`${BLOG.link}`}
-          openGraph={{
-            title: "阅读指南 - 发现全球优质免费电子书、漫画绘本、小说与教育学术资源",
-            description: "阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。",
-            url: `${BLOG.link}`,
-            type: "website",
-            images: [
-              {
-                url: "/og-image.jpg",
-                width: 1200,
-                height: 630,
-                alt: "阅读指南",
-              },
-            ],
-          }}
-          twitter={{
-            cardType: "summary_large_image",
-          }}
-          additionalMetaTags={[
-            {
-              name: "keywords",
-              content: "阅读指南,电子书资源,漫画绘本,儿童绘本,小说,网络小说,Z-Library,学术论文,有声读物,免费电子书,阅读资源导航,电子书下载,学术资源,知识获取"
-            },
-            {
-              name: "robots",
-              content: "index, follow"
-            }
-          ]}
-          additionalLinkTags={[
-            {
-              rel: 'icon',
-              href: '/favicon.ico',
-            },
-            {
-              rel: 'icon',
-              href: '/favicon.png',
-            },
-            {
-              rel: 'icon',
-              href: '/favicon.dark.png',
-              media: '(prefers-color-scheme: dark)',
-            },
-          ]}
-          jsonLd={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "阅读指南",
-            "url": `${BLOG.link}`,
-            "description": "阅读指南为您精选全球优质电子书、漫画绘本、小说、有声读物、学术论文和杂志资源网站，提供便捷的阅读资源导航，让知识触手可及。",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": `${BLOG.link}/search?q={search_term_string}`,
-              "query-input": "required name=search_term_string"
-            },
-            "about": [
-              {
-                "@type": "Thing",
-                "name": "电子书",
-                "description": "各类电子书资源"
-              },
-              {
-                "@type": "Thing",
-                "name": "小说",
-                "description": "各类网络小说和文学作品"
-              },
-              {
-                "@type": "Thing",
-                "name": "漫画绘本",
-                "description": "漫画和儿童绘本资源"
-              },
-              {
-                "@type": "Thing",
-                "name": "学术资源",
-                "description": "学术论文和研究资料"
-              }
-            ]
-          }}
-        />
-
         {/* 顶部横幅 */}
         <div className={styles.hero}>
           <h1 className={styles.heroTitle}>阅读指南</h1>
