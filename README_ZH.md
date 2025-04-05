@@ -106,9 +106,6 @@ MIT License © 2025 [Readzn]
 
 <img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="支持Readzn">
 
-捐赠记录
-[https://readzn.com/donate-support](https://readzn.com/donate-support)
-
 ## 联系我们
 📧 反馈邮箱：hyperfunc@protonmail.com
 🐞 Bug提交：https://github.com/ChrisHyperFunc/readzn/issues

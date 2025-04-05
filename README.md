@@ -104,9 +104,6 @@ If you find this project helpful, you can support us by buying us a coffee:
 
 <img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="Support Readzn">
 
-Contribution History
-[https://readzn.com/donate-support](https://readzn.com/donate-support)
-
 ## Contact Us
 📧 Feedback Email: hyperfunc@protonmail.com
 🐞 Bug Report: https://github.com/ChrisHyperFunc/readzn/issues
