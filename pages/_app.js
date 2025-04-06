@@ -42,7 +42,13 @@ export default function MyApp ({ Component, pageProps, config, locale }) {
 
 MyApp.getInitialProps = async ctx => {
   const config = typeof window === 'object'
-    ? await fetch('/api/config').then(res => res.json())
+    ? await import('@/lib/client/fetch').then(module => {
+        const secureFetch = module.default;
+        return secureFetch('/api/config').catch(err => {
+          console.error('获取配置失败:', err);
+          return {};
+        });
+      })
     : await import('@/lib/server/config').then(module => module.clientConfig)
 
   prepareDayjs(config.timezone)

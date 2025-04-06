@@ -46,7 +46,7 @@ export default function Contact() {
           <h2>联系我们</h2>
           <p>如有任何疑问，请通过以下方式联系我们：</p>
           <a href={`mailto:${BLOG.email}`} className={styles.emailLink}>{BLOG.email}</a>
-          <p class="responseNote">我们承诺在48小时内回复您的消息。</p>
+          <p className="responseNote">我们承诺在48小时内回复您的消息。</p>
         </div>
       </div>
 

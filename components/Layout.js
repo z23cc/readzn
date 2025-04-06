@@ -1,5 +1,6 @@
 import Header from './Header'
 import Footer from './Footer'
+import Analytics from './Analytics'
 
 export default function Layout({ children, navBarTitle, fullWidth }) {
   return (
@@ -9,6 +10,7 @@ export default function Layout({ children, navBarTitle, fullWidth }) {
         {children}
       </main>
       <Footer />
+      <Analytics />
     </div>
   )
 }

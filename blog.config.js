@@ -19,6 +19,14 @@ const BLOG = {
   autoCollapsedNavBar: false, // The automatically collapsed navigation bar
   ogImageGenerateURL: 'https://readzn.com', // The link to generate OG image, don't end with a slash
   socialLink: 'https://github.com/ChrisHyperFunc/readzn',
+  // API加密配置 - 在构建时注入到客户端
+  apiEncryption: {
+    enabled: process.env.API_ENCRYPTION_ENABLED === 'true', // 从环境变量读取是否启用加密
+    algorithm: process.env.API_ENCRYPTION_ALGORITHM || 'aes-256-cbc', // 加密算法
+    secretKey: process.env.API_ENCRYPTION_SECRET_KEY || 'default-secret-key-please-change-in-env', // 加密密钥
+    iv: process.env.API_ENCRYPTION_IV || 'default-iv-16byte', // 初始化向量
+    endpoints: ['https://readzn.com/api', 'https://xiayibendushenme.com/api'] // 需要加密的API端点
+  },
   seo: {
     keywords: ['阅读指南', '阅读资源', '书籍推荐', '知识分享', '电子书', '阅读技巧', '书单', '读书笔记', '优质书籍', '全球阅读'],
     googleSiteVerification: '' // Remove the value or replace it with your own google site verification code

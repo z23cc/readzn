@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { encrypt, shouldEncrypt } from '@/lib/encryption';
+import BLOG from '@/blog.config';
 
 export default async function handler(req, res) {
   // 只允许GET请求
@@ -41,8 +43,31 @@ export default async function handler(req, res) {
     // 设置响应头
     res.setHeader('Content-Type', contentType);
 
-    // 返回响应
-    return res.status(proxyRes.status).send(proxyRes.data);
+    // 检查是否需要加密响应
+    const targetUrl = decodedUrl;
+    const shouldEncryptResponse = BLOG.apiEncryption?.enabled &&
+                                shouldEncrypt(targetUrl, BLOG.apiEncryption.endpoints);
+
+    if (shouldEncryptResponse && contentType.includes('application/json')) {
+      // 如果是JSON响应且需要加密
+      try {
+        // 将二进制数据转换为字符串
+        const jsonData = JSON.parse(proxyRes.data.toString());
+
+        // 加密数据
+        const encryptedData = encrypt(jsonData, BLOG.apiEncryption);
+
+        // 返回加密后的数据
+        return res.status(proxyRes.status).json(encryptedData);
+      } catch (error) {
+        console.error('加密响应失败:', error);
+        // 加密失败时返回原始数据
+        return res.status(proxyRes.status).send(proxyRes.data);
+      }
+    } else {
+      // 不需要加密，直接返回原始响应
+      return res.status(proxyRes.status).send(proxyRes.data);
+    }
   } catch (error) {
     console.error('代理请求错误:', error);
     return res.status(500).json({ error: '代理请求失败', message: error.message });

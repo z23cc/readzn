@@ -3,6 +3,7 @@ import styles from '@/styles/SearchComponent.module.css';
 import Link from 'next/link';
 import LazyImage from './LazyImage';
 import DefaultCover from './DefaultCover';
+import secureFetch from '@/lib/client/fetch';
 
 const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
   const [searchValue, setSearchValue] = useState(initialSearchValue);
@@ -107,8 +108,8 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
     try {
       // 使用Next.js API路由代理请求，避免CORS问题
       const proxyUrl = `/api/proxy?url=${encodeURIComponent('https://xiayibendushenme.com/api/bookbeans/random')}`;
-      const response = await fetch(proxyUrl);
-      const data = await response.json();
+      // 使用安全fetch函数，自动处理加密响应
+      const data = await secureFetch(proxyUrl);
 
       if (Array.isArray(data) && data.length > 0) {
         const randomBook = data[0];
@@ -153,8 +154,8 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
       // 如果没有缓存数据，则请求API
       // 使用Next.js API路由代理请求，避免CORS问题
       const proxyUrl = `/api/proxy?url=${encodeURIComponent('https://xiayibendushenme.com/api/doubannews')}`;
-      const response = await fetch(proxyUrl);
-      const data = await response.json();
+      // 使用安全fetch函数，自动处理加密响应
+      const data = await secureFetch(proxyUrl);
 
       if (Array.isArray(data) && data.length > 0) {
         // 将API返回的书籍添加到电子书类别中，确保不重复
