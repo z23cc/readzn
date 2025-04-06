@@ -71,7 +71,7 @@ export default function Home({ postsToShow }) {
           id: post.id,
           title: post.title,
           description: post.summary,
-          image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : null,
+          image: post.cover ? "https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : null,
           title: post.title,
           link: post.link,
           tags: post.tags,

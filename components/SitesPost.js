@@ -51,7 +51,7 @@ export default function SitesPost(props) {
         <div className={styles.siteHeader}>
           <div className={styles.siteImageWrapper}>
             <Image
-              src={post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png"}
+              src={post.cover ? "https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : "https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png"}
               alt={post.title}
               layout="fill"
               objectFit="cover"

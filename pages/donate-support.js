@@ -27,7 +27,7 @@ export default function Donate() {
             <div style={{ display: 'flex', justifyContent: 'center', margin: '30px 0' }}>
               <div style={{ textAlign: 'center' }}>
                 <Image
-                  src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg"
+                  src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg"
                   alt="赞赏码"
                   width={300}
                   height={300}

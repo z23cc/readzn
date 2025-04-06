@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['gravatar.com', 'cdn.jsdelivr.net', 'ionized-belly-695.notion.site']
+    domains: ['gravatar.com', 'cdn.jsdelivr.net', 'gcore.jsdelivr.net', 'ionized-belly-695.notion.site']
   },
   eslint: {
     // dirs: ['components', 'layouts', 'lib', 'pages']

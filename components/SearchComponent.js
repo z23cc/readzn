@@ -380,7 +380,7 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
       return searchContent.toLowerCase().includes(searchValue.toLowerCase());
     }).map(post => ({
       ...post,
-      image: post.cover ? "https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : null
+      image: post.cover ? "https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main" + post.cover : null
     }));
   }
 

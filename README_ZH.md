@@ -1,4 +1,4 @@
-<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">[https://readzn.com/](https://readzn.com/)
+<img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">[https://readzn.com/](https://readzn.com/)
 
 
 [English](README.md) | 简体中文
@@ -104,7 +104,7 @@ MIT License © 2025 [Readzn]
 
 如果您觉得这个项目对您有帮助，欢迎请我们喝杯咖啡：
 （微信扫码）
-<img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="支持Readzn">
+<img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="支持Readzn">
 
 捐赠记录
 [https://readzn.com/donate-support](https://readzn.com/donate-support)
