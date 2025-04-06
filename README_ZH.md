@@ -103,7 +103,7 @@ MIT License © 2025 [Readzn]
 ## 支持我们
 
 如果您觉得这个项目对您有帮助，欢迎请我们喝杯咖啡：
-
+（微信扫码）
 <img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="支持Readzn">
 
 捐赠记录

@@ -33,7 +33,7 @@ export default function Donate() {
                   height={300}
                   style={{ borderRadius: '8px' }}
                 />
-                <p style={{ marginTop: '10px', fontSize: '0.9em', color: '#666' }}>扫描上方二维码进行捐赠</p>
+                <p style={{ marginTop: '10px', fontSize: '0.9em', color: '#666' }}>使用微信扫描上方二维码进行捐赠</p>
               </div>
             </div>
 

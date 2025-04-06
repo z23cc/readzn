@@ -101,7 +101,7 @@ MIT License © 2025 [Readzn]
 ## Support Us
 
 If you find this project helpful, you can support us by buying us a coffee:
-
+（WeChat）
 <img src="https://cdn.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="Support Readzn">
 
 Contribution History
