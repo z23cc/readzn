@@ -121,11 +121,17 @@ const SearchComponent = ({ postsToShow, initialSearchValue = '' }) => {
         }
 
         // 更新推荐书籍
+        const bookTitle = randomBook.title.replace(/《|》/g, ''); // 移除书名中的书名号
         setRecommendedBook({
-          title: randomBook.title.replace(/《|》/g, ''), // 移除书名中的书名号
+          title: bookTitle,
           rating: randomBook.score,
           ratingText: `评级${randomBook.score}星`
         });
+
+        // 如果搜索框不为空，则将推荐书籍的标题设置为搜索框的值
+        if (searchValue && searchValue.trim() !== '') {
+          setSearchValue(bookTitle);
+        }
       }
     } catch (error) {
       console.error('获取随机书籍数据失败:', error);
