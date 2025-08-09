@@ -18,7 +18,7 @@ export default function Search({ tags, posts }) {
   return <SearchLayout tags={tags} posts={posts} initialSearchValue={searchQuery} />
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const posts = await getAllPosts({ includePages: false })
   const tags = getAllTagsFromPosts(posts)
   return {

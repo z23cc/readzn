@@ -1,0 +1,87 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许一个并发部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望让这些生产部署完成
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # 构建作业
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          # 自动检测生成器并配置 Pages
+          static_site_generator: next
+          # 禁用自动设置 basePath，因为我们使用自定义域名
+          enable_jekyll: false
+          
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          # 当依赖或源代码改变时生成新的缓存
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # 如果源文件没有改变，重新存储缓存
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+        
+      - name: Build with Next.js
+        run: pnpm build
+        env:
+          # 从 GitHub Secrets 中获取环境变量，提供默认值防止构建失败
+          NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID || '24a3563a6ca580038ce3d326c5aa5fc4' }}
+          NOTION_ACCESS_TOKEN: ${{ secrets.NOTION_ACCESS_TOKEN }}
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          API_ENCRYPTION_ENABLED: ${{ secrets.API_ENCRYPTION_ENABLED || 'false' }}
+          API_ENCRYPTION_SECRET_KEY: ${{ secrets.API_ENCRYPTION_SECRET_KEY || 'default-secret-key' }}
+          API_ENCRYPTION_IV: ${{ secrets.API_ENCRYPTION_IV || 'default-iv-16byte' }}
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  # 部署作业
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

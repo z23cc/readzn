@@ -1,4 +1,4 @@
-<img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">[https://readzn.com/](https://readzn.com/)
+<img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50">[https://hub.z23.cc/](https://hub.z23.cc/)
 
 
 [English](README.md) | 简体中文
@@ -107,7 +107,7 @@ MIT License © 2025 [Readzn]
 <img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="支持Readzn">
 
 捐赠记录
-[https://readzn.com/donate-support](https://readzn.com/donate-support)
+[https://hub.z23.cc/donate-support](https://hub.z23.cc/donate-support)
 
 ## 联系我们
 📧 反馈邮箱：hyperfunc@protonmail.com

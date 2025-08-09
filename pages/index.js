@@ -6,7 +6,6 @@ import { useConfig } from "@/lib/config";
 import { getAllPosts } from '@/lib/notion';
 import { clientConfig } from '@/lib/server/config';
 import BookmarkPrompt from '@/components/BookmarkPrompt';
-import SiteInfo from '@/components/SiteInfo';
 import LinkStatus from '@/components/LinkStatus';
 import DefaultCover from '@/components/DefaultCover';
 import SearchComponent from '@/components/SearchComponent';
@@ -22,8 +21,7 @@ export async function getStaticProps() {
     props: {
       postsToShow,
       showNext
-    },
-    revalidate: 1
+    }
   }
 }
 
@@ -162,9 +160,6 @@ export default function Home({ postsToShow }) {
 
           {/* 收藏提示框 */}
           <BookmarkPrompt />
-
-          {/* MIT开源协议和Notion后台管理信息 */}
-          <SiteInfo />
       </div>
     </Layout>
   );

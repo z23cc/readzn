@@ -7,11 +7,11 @@ export default function Header({navBarTitle, fullWidth}) {
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link href="/">
-          <Image src="/logo.png" alt="readzn.com Logo" width={40} height={40}/>
+          <Image src="/logo.png" alt="hub.z23.cc Logo" width={40} height={40}/>
         </Link>
         <div className={styles.titleContainer}>
           <h1>{navBarTitle || "阅读指南"}</h1>
-          <span className={styles.domain}>readzn.com</span>
+          <span className={styles.domain}>hub.z23.cc</span>
           <span className={styles.slogan}>爱读书，会读书，读好书</span>
         </div>
 
@@ -29,7 +29,7 @@ export default function Header({navBarTitle, fullWidth}) {
           <li><Link title="Contact Us" href="/contact">关于我们</Link></li>
           <li>
             <a
-              href="https://github.com/ChrisHyperFunc/readzn"
+              href="https://github.com/z23cc/readzn"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.githubLink}

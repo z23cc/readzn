@@ -1,16 +1,16 @@
 {
   "name": "readzn",
   "version": "1.3.0",
-  "homepage": "https://readzn.com",
+  "homepage": "https://hub.z23.cc",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChrisHyperFunc/readzn.git"
+    "url": "https://github.com/z23cc/readzn.git"
   },
   "author": {
     "name": "Readzn",
     "email": "hyperfunc@protonmail.com",
-    "url": "https://readzn.com"
+    "url": "https://hub.z23.cc"
   },
   "scripts": {
     "dev": "next dev",

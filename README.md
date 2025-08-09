@@ -1,4 +1,4 @@
-<img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50"> [https://readzn.com/](https://readzn.com/)
+<img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/static-storage@main/img/default.png" width="50" height="50"> [https://hub.z23.cc/](https://hub.z23.cc/)
 
 English | [简体中文](README_ZH.md)
 
@@ -105,7 +105,7 @@ If you find this project helpful, you can support us by buying us a coffee:
 <img src="https://gcore.jsdelivr.net/gh/ChrisHyperFunc/readzn@main/zhan-shang.jpg" width="300" alt="Support Readzn">
 
 Contribution History
-[https://readzn.com/donate-support](https://readzn.com/donate-support)
+[https://hub.z23.cc/donate-support](https://hub.z23.cc/donate-support)
 
 ## Contact Us
 📧 Feedback Email: hyperfunc@protonmail.com

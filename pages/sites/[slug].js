@@ -37,7 +37,7 @@ export default function BlogPost({ post, blockMap, emailHash }) {
             {
               url: `${BLOG.ogImageGenerateURL}/${encodeURIComponent(
                 post.title
-              )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Freadzn.com%2Ffavicon.png`,
+              )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fhub.z23.cc%2Ffavicon.png`,
               width: 1200,
               height: 630,
               alt: post.title,
@@ -93,7 +93,7 @@ export async function getStaticPaths() {
   const posts = await getAllPosts({ includePages: true })
   return {
     paths: posts.map(row => ({ params: { slug: row.slug } })),
-    fallback: true
+    fallback: false
   }
 }
 
@@ -111,7 +111,6 @@ export async function getStaticProps({ params: { slug } }) {
     .toLowerCase()
 
   return {
-    props: { post, blockMap, emailHash },
-    revalidate: 1
+    props: { post, blockMap, emailHash }
   }
 }

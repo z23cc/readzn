@@ -2,7 +2,7 @@ const BLOG = {
   title: '阅读指南',
   author: '阅读指南',
   email: 'hyperfunc@protonmail.com',
-  link: 'https://readzn.com',
+  link: 'https://hub.z23.cc',
   description: '发现和探索全球优质的阅读资源，让知识触手可及。',
   lang: 'zh-CN', // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   timezone: 'Asia/Shanghai', // Your Notion posts' date will be interpreted as this timezone. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for all options.
@@ -17,15 +17,15 @@ const BLOG = {
   showAbout: true,
   showArchive: true,
   autoCollapsedNavBar: false, // The automatically collapsed navigation bar
-  ogImageGenerateURL: 'https://readzn.com', // The link to generate OG image, don't end with a slash
-  socialLink: 'https://github.com/ChrisHyperFunc/readzn',
+  ogImageGenerateURL: 'https://hub.z23.cc', // The link to generate OG image, don't end with a slash
+  socialLink: 'https://github.com/z23cc/readzn',
   // API加密配置 - 在构建时注入到客户端
   apiEncryption: {
     enabled: process.env.API_ENCRYPTION_ENABLED === 'true', // 从环境变量读取是否启用加密
     algorithm: process.env.API_ENCRYPTION_ALGORITHM || 'aes-256-cbc', // 加密算法
     secretKey: process.env.API_ENCRYPTION_SECRET_KEY || 'default-secret-key-please-change-in-env', // 加密密钥
     iv: process.env.API_ENCRYPTION_IV || 'default-iv-16byte', // 初始化向量
-    endpoints: ['https://readzn.com/api', 'https://xiayibendushenme.com/api'] // 需要加密的API端点
+    endpoints: ['https://hub.z23.cc/api', 'https://xiayibendushenme.com/api'] // 需要加密的API端点
   },
   seo: {
     keywords: ['阅读指南', '阅读资源', '书籍推荐', '知识分享', '电子书', '阅读技巧', '书单', '读书笔记', '优质书籍', '全球阅读'],
