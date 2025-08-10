@@ -85,7 +85,7 @@ docker run -d --name readzn -p 3000:3000 -e NOTION_PAGE_ID=${NOTION_PAGE_ID} ${I
 ## 贡献指南
 
 欢迎通过以下方式参与贡献：
-1. 在[Issues](https://github.com/ChrisHyperFunc/readzn/issues)提交问题
+1. 在[Issues](https://github.com/z23cc/readzn/issues)提交问题
 2. 遵循[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)分支规范
 3. 提交Pull Request前请执行：
 ```bash
@@ -111,7 +111,7 @@ MIT License © 2025 [Readzn]
 
 ## 联系我们
 📧 反馈邮箱：hyperfunc@protonmail.com
-🐞 Bug提交：https://github.com/ChrisHyperFunc/readzn/issues
+🐞 Bug提交：https://github.com/z23cc/readzn/issues
 
 ## 特别感谢
 本项目基于[nobelium](https://github.com/craigary/nobelium)项目构建，特别感谢原作者的杰出工作。

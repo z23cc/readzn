@@ -11,7 +11,7 @@ export default function Privacy() {
 
           <section className={styles.section}>
             <h2>Our Commitment to Privacy</h2>
-            <p>At readzn.com, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+            <p>At hub.z23.cc, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
           </section>
 
           <section className={styles.section}>

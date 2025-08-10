@@ -52,7 +52,7 @@ apiEncryption: {
   algorithm: process.env.API_ENCRYPTION_ALGORITHM || 'aes-256-cbc',
   secretKey: process.env.API_ENCRYPTION_SECRET_KEY || 'default-secret-key-please-change-in-env', // 密钥长度会自动调整为32字节
   iv: process.env.API_ENCRYPTION_IV || 'default-iv-16byte', // IV长度会自动调整为16字节
-  endpoints: ['https://readzn.com/api', 'https://xiayibendushenme.com/api'] // 需要加密的API端点
+  endpoints: ['https://hub.z23.cc/api', 'https://xiayibendushenme.com/api'] // 需要加密的API端点
 }
 
 注意：
